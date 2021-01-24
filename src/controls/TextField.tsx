@@ -4,6 +4,8 @@ import MuiTextField from '@material-ui/core/TextField';
 import { FieldName } from 'react-hook-form/dist/types/form';
 import { FieldRules } from '../types/form';
 
+type Transform = (value: string) => any;
+
 interface Props<T> {
     id?: string;
     name: keyof T;
@@ -14,7 +16,7 @@ interface Props<T> {
     rules?: FieldRules;
     type?: 'text' | 'number' | 'password';
     disabled?: boolean;
-    transform?: (value: string) => any;
+    transform?: Transform;
     placeholder?: string;
 }
 
@@ -33,6 +35,11 @@ const TextField = <T extends object>(props: Props<T>) => {
         placeholder
     } = props;
 
+    let actualTransform: Transform | undefined = transform;
+    if (type === 'number' && transform === undefined) {
+        actualTransform = (value) => value ? parseInt(value, 10) : '';
+    }
+
     return (
         <Controller
             control={ control }
@@ -46,8 +53,8 @@ const TextField = <T extends object>(props: Props<T>) => {
                     label={ label }
                     placeholder={ placeholder }
                     onChange={ (event) => {
-                        if (transform) {
-                            onChange(transform(event.target.value));
+                        if (actualTransform) {
+                            onChange(actualTransform(event.target.value));
                         } else {
                             onChange(event.target.value);
                         }
