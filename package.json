@@ -1,0 +1,9 @@
+{
+  "name": "@craigmiller160/react-hook-form-material-ui",
+  "version": "1.0.0-beta",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@craigmiller160/react-web-config": "^2.7.1"
+  }
+}
