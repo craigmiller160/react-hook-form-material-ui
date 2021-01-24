@@ -2,7 +2,7 @@ import React from 'react';
 import { Control, Controller, FieldError } from 'react-hook-form';
 import MuiTextField from '@material-ui/core/TextField';
 import { FieldName } from 'react-hook-form/dist/types/form';
-import { FieldRules } from '../../../types/form';
+import { FieldRules } from '../types/form';
 
 interface Props<T> {
     id?: string;
