@@ -1,6 +1,6 @@
 import React from 'react';
 import { Control, Controller, FieldError } from 'react-hook-form';
-import { FieldName } from 'react-hook-form/dist/types/form';
+import { FieldName } from 'react-hook-form/dist/types/fields';
 import MuiAutocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
 import { FieldRules, SelectOption } from '../types/form';
