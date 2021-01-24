@@ -17,7 +17,7 @@ const onSubmit = jest.fn();
 const FormComponent = (props: FormComponentProps) => {
     const defaultValue = props.type ? '' : 0;
     const { control, errors, handleSubmit, formState, getValues } = useForm<Form>({
-        mode: 'onChange',
+        mode: 'onBlur',
         reValidateMode: 'onChange',
         defaultValues: {
             field: defaultValue
@@ -25,7 +25,6 @@ const FormComponent = (props: FormComponentProps) => {
     });
 
     const doSubmit = (args: any) => {
-        console.log('Submitting', args);
         onSubmit(args);
     };
 
@@ -41,7 +40,6 @@ const FormComponent = (props: FormComponentProps) => {
                     type={ props.type }
                 />
                 <button type="submit">Submit</button>
-                <p>Current Value: { getValues().field }</p>
             </form>
         </div>
     );
