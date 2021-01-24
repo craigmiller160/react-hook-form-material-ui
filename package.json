@@ -1,8 +1,13 @@
 {
   "name": "@craigmiller160/react-hook-form-material-ui",
   "version": "1.0.0-beta",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "license": "MIT",
+  "files": [
+    "lib",
+    ".yalc"
+  ],
   "scripts": {
     "start": "web-config-scripts devServer",
     "build": "web-config-scripts lint && web-config-scripts test && web-config-scripts webpack && web-config-scripts prepDeploy",
