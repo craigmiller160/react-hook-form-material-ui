@@ -24,11 +24,14 @@ const FormComponent = (props: FormComponentProps) => {
         }
     });
 
-    console.log(formState); // TODO delete this
+    const doSubmit = (args: any) => {
+        console.log('Submitting', args);
+        onSubmit(args);
+    };
 
     return (
         <div>
-            <form onSubmit={ handleSubmit(onSubmit) }>
+            <form onSubmit={ handleSubmit(doSubmit) }>
                 <TextField
                     id="field"
                     name="field"
@@ -54,7 +57,11 @@ describe('TextField', () => {
 
         const textField = screen.getByLabelText('The Field');
         userEvent.type(textField, 'Hello World');
-        screen.debug(); // TODO delete this
+
+        await waitFor(() => userEvent.click(screen.getByText('Submit')));
+        expect(onSubmit).toHaveBeenCalledWith({
+            field: 'Hello World'
+        });
     });
 
     it('accepts input for type number', () => {
