@@ -1,7 +1,6 @@
 import React from 'react';
 import { Control, Controller, FieldError } from 'react-hook-form';
 import MuiTextField from '@material-ui/core/TextField';
-import { FieldName } from 'react-hook-form/dist/types/fields';
 import { FieldRules } from '../types/form';
 
 type Transform = (value: string) => any;
