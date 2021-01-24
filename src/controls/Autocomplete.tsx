@@ -1,14 +1,13 @@
 import React from 'react';
 import { Control, Controller, FieldError } from 'react-hook-form';
-import { FieldName } from 'react-hook-form/dist/types/form';
 import MuiAutocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
 import { FieldRules, SelectOption } from '../types/form';
 
-interface Props<T, R> {
+interface Props<R> {
     id?: string;
-    name: keyof T;
-    control: Control<T>;
+    name: string;
+    control: Control;
     error?: FieldError;
     rules?: FieldRules;
     label: string;
@@ -16,7 +15,7 @@ interface Props<T, R> {
     className?: string;
 }
 
-const Autocomplete = <T extends object, R extends any>(props: Props<T, R>) => {
+const Autocomplete = <R extends any>(props: Props<R>) => {
     const {
         id,
         name,
@@ -31,7 +30,7 @@ const Autocomplete = <T extends object, R extends any>(props: Props<T, R>) => {
     return (
         <Controller
             control={ control }
-            name={ name as FieldName<T> }
+            name={ name }
             rules={ rules }
             render={ ({ onChange, onBlur, value }) => (
                 <MuiAutocomplete

@@ -1,15 +1,14 @@
 import React from 'react';
 import { Control, Controller, FieldError } from 'react-hook-form';
 import MuiTextField from '@material-ui/core/TextField';
-import { FieldName } from 'react-hook-form/dist/types/form';
 import { FieldRules } from '../types/form';
 
 type Transform = (value: string) => any;
 
-interface Props<T> {
+interface Props {
     id?: string;
-    name: keyof T;
-    control: Control<T>;
+    name: string;
+    control: Control;
     label: string;
     className?: string;
     error?: FieldError;
@@ -20,7 +19,7 @@ interface Props<T> {
     placeholder?: string;
 }
 
-const TextField = <T extends object>(props: Props<T>) => {
+const TextField = (props: Props) => {
     const {
         id,
         name,
@@ -43,7 +42,7 @@ const TextField = <T extends object>(props: Props<T>) => {
     return (
         <Controller
             control={ control }
-            name={ name as FieldName<T> }
+            name={ name }
             rules={ rules }
             render={ ({ onChange, onBlur, value }) => (
                 <MuiTextField
