@@ -1,6 +1,8 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import Switch from '../../src/controls/Switch';
+import { render, waitFor, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 interface Form {
     field: boolean;
@@ -19,19 +21,30 @@ const FormComponent = () => {
 
     return (
         <div>
-            <form onSubmit={ handleSubmit(onSubmit) }>
+            <form onSubmit={ handleSubmit((values) => onSubmit(values)) }>
                 <Switch
                     name="field"
                     control={ control }
                     label="The Field"
                 />
+                <button type="submit">Submit</button>
             </form>
         </div>
     );
 };
 
 describe('Switch', () => {
-    it('works', () => {
-        throw new Error();
+    it('works', async () => {
+        await waitFor(() => render(
+            <FormComponent />
+        ));
+
+        const input = screen.getByLabelText('The Field');
+        userEvent.click(input);
+
+        await waitFor(() => userEvent.click(screen.getByText('Submit')));
+        expect(onSubmit).toHaveBeenCalledWith({
+            field: true
+        });
     });
 });

@@ -27,13 +27,9 @@ const FormComponent = (props: FormComponentProps) => {
         }
     });
 
-    const doSubmit = (args: any) => {
-        onSubmit(args);
-    };
-
     return (
         <div>
-            <form onSubmit={ handleSubmit(doSubmit) }>
+            <form onSubmit={ handleSubmit((values) => onSubmit(values)) }>
                 <TextField
                     id="field"
                     name="field"
