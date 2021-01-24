@@ -1,8 +1,8 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import TextField from '../../src/controls/TextField';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import TextField from '../../src/controls/TextField';
 import { FieldRules } from '../../src';
 
 interface Form {
@@ -19,7 +19,7 @@ const onSubmit = jest.fn();
 
 const FormComponent = (props: FormComponentProps) => {
     const defaultValue = props.type ? '' : 0;
-    const { control, errors, handleSubmit, formState, getValues } = useForm<Form>({
+    const { control, errors, handleSubmit } = useForm<Form>({
         mode: 'onBlur',
         reValidateMode: 'onChange',
         defaultValues: {

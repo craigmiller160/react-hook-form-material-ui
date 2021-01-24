@@ -37,7 +37,7 @@ const TextField = <T extends object>(props: Props<T>) => {
 
     let actualTransform: Transform | undefined = transform;
     if (type === 'number' && transform === undefined) {
-        actualTransform = (value) => value ? parseInt(value, 10) : '';
+        actualTransform = (value) => (value ? parseInt(value, 10) : '');
     }
 
     return (
