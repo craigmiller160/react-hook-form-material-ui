@@ -62,8 +62,31 @@ describe('TextField', () => {
         });
     });
 
-    it('accepts input for type number', () => {
-        throw new Error();
+    it('accepts input for type number', async () => {
+        await waitFor(() => render(
+            <FormComponent
+                type="number"
+            />
+        ));
+
+        const textField = screen.getByLabelText('The Field');
+        const submit = screen.getByText('Submit');
+
+        userEvent.clear(textField);
+        userEvent.type(textField, '12345');
+
+        await waitFor(() => userEvent.click(submit));
+        expect(onSubmit).toHaveBeenNthCalledWith(1, {
+            field: '12345'
+        });
+
+        userEvent.clear(textField);
+        userEvent.type(textField, 'ABC');
+
+        await waitFor(() => userEvent.click(submit));
+        expect(onSubmit).toHaveBeenNthCalledWith(2, {
+            field: ''
+        });
     })
 
     it('displays error message for validation rules', () => {
