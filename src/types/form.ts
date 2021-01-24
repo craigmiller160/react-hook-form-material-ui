@@ -10,3 +10,8 @@ export interface FieldRules {
     pattern?: ValidationRule<RegExp>;
     validate?: Validate | Record<string, Validate>;
 }
+
+export interface SelectOption<R> {
+    label: string;
+    value: R;
+}
