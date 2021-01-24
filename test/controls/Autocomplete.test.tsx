@@ -2,6 +2,8 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { SelectOption } from '../../src';
 import Autocomplete from '../../src/controls/Autocomplete';
+import { render, waitFor, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 interface Form {
     field: SelectOption<number> | null;
@@ -55,7 +57,22 @@ const FormComponent = () => {
 };
 
 describe('Autocomplete', () => {
-    it('can select option', () => {
-        throw new Error();
+    it('can select option', async () => {
+        await waitFor(() => render(
+            <FormComponent />
+        ));
+
+        const input = screen.getByLabelText('The Field');
+
+        await waitFor(() => userEvent.click(input));
+        await waitFor(() => userEvent.click(screen.getByText('Third')));
+
+        await waitFor(() => userEvent.click(screen.getByText('Submit')));
+        expect(onSubmit).toHaveBeenCalledWith({
+            field: {
+                label: 'Third',
+                value: 3
+            }
+        });
     });
 });
