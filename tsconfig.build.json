@@ -17,8 +17,9 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "react",
-    "declaration": false,
-    "module": "es2015"
+    "declaration": true,
+    "module": "es2015",
+    "outDir": "/home/craig/Development/Libraries/react-hook-form-material-ui/lib"
   },
   "include": [
     "/home/craig/Development/Libraries/react-hook-form-material-ui/src/**/*"

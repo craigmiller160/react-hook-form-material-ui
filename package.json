@@ -10,9 +10,8 @@
   ],
   "scripts": {
     "start": "web-config-scripts devServer",
-    "build": "web-config-scripts lint && web-config-scripts test && web-config-scripts webpack && web-config-scripts prepDeploy",
-    "forceBuild": "web-config-scripts webpack",
-    "prepDeploy": "web-config-scripts prepDeploy",
+    "build": "web-config-scripts lint && web-config-scripts test && web-config-scripts buildTSLib",
+    "forceBuild": "web-config-scripts buildTSLib",
     "lint": "web-config-scripts lint",
     "test": "web-config-scripts test"
   },
