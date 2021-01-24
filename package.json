@@ -16,7 +16,10 @@
     "test": "web-config-scripts test"
   },
   "devDependencies": {
-    "@craigmiller160/react-web-config": "^2.7.1"
+    "@craigmiller160/react-web-config": "^2.7.1",
+    "@testing-library/jest-dom": "^5.11.9",
+    "@testing-library/react": "^11.2.3",
+    "@testing-library/user-event": "^12.6.2"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.3",
