@@ -19,6 +19,7 @@ interface Props {
     placeholder?: string;
     multiline?: boolean;
     rows?: number;
+    variant?: 'standard' | 'filled' | 'outlined';
 }
 
 const TextField = (props: Props) => {
@@ -35,7 +36,8 @@ const TextField = (props: Props) => {
         transform,
         placeholder,
         multiline,
-        rows
+        rows,
+        variant
     } = props;
 
     let actualTransform: Transform | undefined = transform;
@@ -69,6 +71,7 @@ const TextField = (props: Props) => {
                     disabled={ disabled }
                     multiline={ multiline }
                     rows={ rows }
+                    variant={ variant }
                 />
             ) }
         />
