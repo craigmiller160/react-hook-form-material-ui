@@ -13,6 +13,7 @@ interface FormComponentProps {
     type: 'text' | 'number';
     rules?: FieldRules;
     transform?: (value: string) => any;
+    textArea?: boolean;
 }
 
 const onSubmit = jest.fn();
@@ -39,6 +40,8 @@ const FormComponent = (props: FormComponentProps) => {
                     type={ props.type }
                     rules={ props.rules }
                     transform={ props.transform }
+                    multiline={ props.textArea }
+                    rows={ props.textArea ? 5 : 0 }
                 />
                 <button type="submit">Submit</button>
             </form>
@@ -107,7 +110,16 @@ describe('TextField', () => {
         });
     });
 
-    it('shows text area', () => {
-        throw new Error();
+    it('shows text area', async () => {
+        await waitFor(() => render(
+            <FormComponent
+                type="text"
+                textArea
+            />
+        ));
+
+        const input = screen.getByLabelText('The Field');
+        expect(input.tagName).toEqual('TEXTAREA');
+        expect((input as HTMLTextAreaElement).rows).toEqual(5);
     });
 });
