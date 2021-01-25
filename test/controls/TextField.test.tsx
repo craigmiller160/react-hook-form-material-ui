@@ -106,4 +106,8 @@ describe('TextField', () => {
             field: 'HELLO WORLD'
         });
     });
+
+    it('shows text area', () => {
+        throw new Error();
+    });
 });
