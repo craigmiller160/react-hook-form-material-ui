@@ -17,6 +17,8 @@ interface Props {
     disabled?: boolean;
     transform?: Transform;
     placeholder?: string;
+    multiline?: boolean;
+    rows?: number;
 }
 
 const TextField = (props: Props) => {
@@ -31,7 +33,9 @@ const TextField = (props: Props) => {
         type,
         disabled,
         transform,
-        placeholder
+        placeholder,
+        multiline,
+        rows
     } = props;
 
     let actualTransform: Transform | undefined = transform;
@@ -63,6 +67,8 @@ const TextField = (props: Props) => {
                     error={ !!error }
                     helperText={ error?.message ?? '' }
                     disabled={ disabled }
+                    multiline={ multiline }
+                    rows={ rows }
                 />
             ) }
         />
