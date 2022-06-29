@@ -64,6 +64,10 @@ describe('Autocomplete', () => {
         const input = screen.getByLabelText('The Field');
 
         await waitFor(() => userEvent.click(input));
+        expect(screen.queryByText('First')).toBeVisible();
+        expect(screen.queryByText('Second')).toBeVisible();
+        expect(screen.queryByText('Third')).toBeVisible();
+        expect(screen.queryByText('Fourth')).toBeVisible();
         await waitFor(() => userEvent.click(screen.getByText('Third')));
 
         await waitFor(() => userEvent.click(screen.getByText('Submit')));

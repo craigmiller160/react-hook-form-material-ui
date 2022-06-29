@@ -5,17 +5,17 @@ import TextField from '@mui/material/TextField';
 import { SelectOption } from '../types/form';
 import { RegisterOptions } from 'react-hook-form/dist/types/validator';
 
-interface Props<R> {
+interface Props<F extends FieldValues,R> {
     id?: string;
-    name: string;
-    control: Control;
-    rules?: Omit<RegisterOptions<FieldValues, FieldPath<FieldValues>>, 'valueAsNumber' | 'valueAsDate' | 'setValueAs' | 'disabled'>;
+    name: FieldPath<F>;
+    control: Control<F>;
+    rules?: Omit<RegisterOptions<F, FieldPath<F>>, 'valueAsNumber' | 'valueAsDate' | 'setValueAs' | 'disabled'>;
     label: string;
     options: Array<SelectOption<R>>;
     className?: string;
 }
 
-const Autocomplete = <R extends any>(props: Props<R>) => {
+const Autocomplete = <F extends FieldValues, R extends any>(props: Props<F,R>) => {
     const {
         id,
         name,
@@ -36,8 +36,7 @@ const Autocomplete = <R extends any>(props: Props<R>) => {
                     id={ id }
                     className={ className }
                     options={ options }
-                    getOptionLabel={ (option) => option?.label ?? '' }
-                    // getOptionSelected={ (option, selected) => option.value === selected.value }
+                    isOptionEqualToValue={(option, selected) => option.value === selected.value}
                     value={ field.value }
                     onChange={ (event, newValue) => field.onChange(newValue) }
                     onBlur={ field.onBlur }
