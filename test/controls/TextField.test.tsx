@@ -2,8 +2,8 @@ import React from 'react';
 import { FieldPath, useForm } from 'react-hook-form';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import TextField from '../../src/controls/TextField';
 import { RegisterOptions } from 'react-hook-form/dist/types/validator';
+import TextField from '../../src/controls/TextField';
 
 interface Form {
     field: string | number;

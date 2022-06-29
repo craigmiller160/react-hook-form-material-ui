@@ -2,10 +2,10 @@ import React from 'react';
 import { Control, Controller, FieldPath, FieldValues } from 'react-hook-form';
 import MuiAutocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
-import { SelectOption } from '../types/form';
 import { RegisterOptions } from 'react-hook-form/dist/types/validator';
+import { SelectOption } from '../types/form';
 
-interface Props<F extends FieldValues,R> {
+interface Props<F extends FieldValues, R> {
     id?: string;
     name: FieldPath<F>;
     control: Control<F>;
@@ -15,7 +15,7 @@ interface Props<F extends FieldValues,R> {
     className?: string;
 }
 
-const Autocomplete = <F extends FieldValues, R extends any>(props: Props<F,R>) => {
+const Autocomplete = <F extends FieldValues, R extends any>(props: Props<F, R>) => {
     const {
         id,
         name,
@@ -36,7 +36,7 @@ const Autocomplete = <F extends FieldValues, R extends any>(props: Props<F,R>) =
                     id={ id }
                     className={ className }
                     options={ options }
-                    isOptionEqualToValue={(option, selected) => option.value === selected.value}
+                    isOptionEqualToValue={ (option, selected) => option.value === selected.value }
                     value={ field.value }
                     onChange={ (event, newValue) => field.onChange(newValue) }
                     onBlur={ field.onBlur }
