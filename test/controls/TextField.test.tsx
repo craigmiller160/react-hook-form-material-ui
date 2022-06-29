@@ -1,9 +1,9 @@
 import React from 'react';
-import { useForm } from 'react-hook-form';
+import { FieldPath, useForm } from 'react-hook-form';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import TextField from '../../src/controls/TextField';
-import { FieldRules } from '../../src';
+import { RegisterOptions } from 'react-hook-form/dist/types/validator';
 
 interface Form {
     field: string | number;
@@ -11,7 +11,7 @@ interface Form {
 
 interface FormComponentProps {
     type: 'text' | 'number';
-    rules?: FieldRules;
+    rules?: Omit<RegisterOptions<Form, FieldPath<Form>>, 'valueAsNumber' | 'valueAsDate' | 'setValueAs' | 'disabled'>;
     transform?: (value: string) => any;
     textArea?: boolean;
 }
@@ -20,7 +20,7 @@ const onSubmit = jest.fn();
 
 const FormComponent = (props: FormComponentProps) => {
     const defaultValue = props.type ? '' : 0;
-    const { control, errors, handleSubmit } = useForm<Form>({
+    const { control, handleSubmit } = useForm<Form>({
         mode: 'onBlur',
         reValidateMode: 'onChange',
         defaultValues: {
@@ -36,7 +36,6 @@ const FormComponent = (props: FormComponentProps) => {
                     name="field"
                     control={ control }
                     label="The Field"
-                    error={ errors.field }
                     type={ props.type }
                     rules={ props.rules }
                     transform={ props.transform }

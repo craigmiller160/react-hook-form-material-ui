@@ -1,18 +1,18 @@
 import React from 'react';
-import { Control, Controller } from 'react-hook-form';
-import MuiSwitch from '@material-ui/core/Switch';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
+import { Control, Controller, FieldPath, FieldValues } from 'react-hook-form';
+import MuiSwitch from '@mui/material/Switch';
+import FormControlLabel from '@mui/material/FormControlLabel';
 
-interface Props {
+interface Props<F extends FieldValues> {
     id?: string;
-    name: string;
-    control: Control;
+    name: FieldPath<F>;
+    control: Control<F>;
     label: string;
     color?: 'primary' | 'secondary' | 'default';
     className?: string;
 }
 
-const Switch = (props: Props) => {
+const Switch = <F extends FieldValues>(props: Props<F>) => {
     const {
         id,
         className,
@@ -28,7 +28,7 @@ const Switch = (props: Props) => {
         <Controller
             control={ control }
             name={ name }
-            render={ ({ onChange, onBlur, value }) => (
+            render={ ({ field: { onChange, onBlur, value } }) => (
                 <FormControlLabel
                     className={ labelClassName }
                     label={ label }

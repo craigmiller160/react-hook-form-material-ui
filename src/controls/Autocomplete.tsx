@@ -1,26 +1,25 @@
 import React from 'react';
-import { Control, Controller, FieldError } from 'react-hook-form';
-import MuiAutocomplete from '@material-ui/lab/Autocomplete';
-import TextField from '@material-ui/core/TextField';
-import { FieldRules, SelectOption } from '../types/form';
+import { Control, Controller, FieldPath, FieldValues } from 'react-hook-form';
+import MuiAutocomplete from '@mui/material/Autocomplete';
+import TextField from '@mui/material/TextField';
+import { SelectOption } from '../types/form';
+import { RegisterOptions } from 'react-hook-form/dist/types/validator';
 
-interface Props<R> {
+interface Props<F extends FieldValues,R> {
     id?: string;
-    name: string;
-    control: Control;
-    error?: FieldError;
-    rules?: FieldRules;
+    name: FieldPath<F>;
+    control: Control<F>;
+    rules?: Omit<RegisterOptions<F, FieldPath<F>>, 'valueAsNumber' | 'valueAsDate' | 'setValueAs' | 'disabled'>;
     label: string;
     options: Array<SelectOption<R>>;
     className?: string;
 }
 
-const Autocomplete = <R extends any>(props: Props<R>) => {
+const Autocomplete = <F extends FieldValues, R extends any>(props: Props<F,R>) => {
     const {
         id,
         name,
         control,
-        error,
         rules,
         label,
         options,
@@ -32,23 +31,22 @@ const Autocomplete = <R extends any>(props: Props<R>) => {
             control={ control }
             name={ name }
             rules={ rules }
-            render={ ({ onChange, onBlur, value }) => (
+            render={ ({ field, fieldState }) => (
                 <MuiAutocomplete
                     id={ id }
                     className={ className }
                     options={ options }
-                    getOptionLabel={ (option) => option?.label ?? '' }
-                    getOptionSelected={ (option, selected) => option.value === selected.value }
-                    value={ value }
-                    onChange={ (event, newValue) => onChange(newValue) }
-                    onBlur={ onBlur }
+                    isOptionEqualToValue={(option, selected) => option.value === selected.value}
+                    value={ field.value }
+                    onChange={ (event, newValue) => field.onChange(newValue) }
+                    onBlur={ field.onBlur }
                     renderInput={ (params) => (
                         <TextField
                             { ...params }
                             label={ label }
                             variant="outlined"
-                            error={ !!error }
-                            helperText={ error?.message ?? '' }
+                            error={ !!fieldState.error }
+                            helperText={ fieldState.error?.message ?? '' }
                         />
                     ) }
                 />

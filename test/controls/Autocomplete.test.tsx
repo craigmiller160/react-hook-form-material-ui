@@ -12,7 +12,7 @@ interface Form {
 const onSubmit = jest.fn();
 
 const FormComponent = () => {
-    const { control, errors, handleSubmit } = useForm<Form>({
+    const { control, handleSubmit } = useForm<Form>({
         mode: 'onBlur',
         reValidateMode: 'onChange',
         defaultValues: {
@@ -47,7 +47,6 @@ const FormComponent = () => {
                     name="field"
                     control={ control }
                     label="The Field"
-                    error={ errors.field }
                     options={ options }
                 />
                 <button type="submit">Submit</button>
@@ -65,6 +64,10 @@ describe('Autocomplete', () => {
         const input = screen.getByLabelText('The Field');
 
         await waitFor(() => userEvent.click(input));
+        expect(screen.queryByText('First')).toBeVisible();
+        expect(screen.queryByText('Second')).toBeVisible();
+        expect(screen.queryByText('Third')).toBeVisible();
+        expect(screen.queryByText('Fourth')).toBeVisible();
         await waitFor(() => userEvent.click(screen.getByText('Third')));
 
         await waitFor(() => userEvent.click(screen.getByText('Submit')));

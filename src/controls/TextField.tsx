@@ -1,18 +1,17 @@
 import React from 'react';
-import { Control, Controller, FieldError } from 'react-hook-form';
-import MuiTextField from '@material-ui/core/TextField';
-import { FieldRules } from '../types/form';
+import { Control, Controller, FieldPath, FieldValues } from 'react-hook-form';
+import MuiTextField from '@mui/material/TextField';
+import { RegisterOptions } from 'react-hook-form/dist/types/validator';
 
 type Transform = (value: string) => any;
 
-interface Props {
+interface Props<F extends FieldValues> {
     id?: string;
-    name: string;
-    control: Control;
+    name: FieldPath<F>;
+    control: Control<F>;
     label: string;
     className?: string;
-    error?: FieldError;
-    rules?: FieldRules;
+    rules?: Omit<RegisterOptions<F, FieldPath<F>>, 'valueAsNumber' | 'valueAsDate' | 'setValueAs' | 'disabled'>;
     type?: 'text' | 'number' | 'password';
     disabled?: boolean;
     transform?: Transform;
@@ -22,14 +21,13 @@ interface Props {
     variant?: 'standard' | 'filled' | 'outlined';
 }
 
-const TextField = (props: Props) => {
+const TextField = <F extends FieldValues>(props: Props<F>) => {
     const {
         id,
         name,
         control,
         className,
         label,
-        error,
         rules,
         type,
         disabled,
@@ -50,7 +48,7 @@ const TextField = (props: Props) => {
             control={ control }
             name={ name }
             rules={ rules }
-            render={ ({ onChange, onBlur, value }) => (
+            render={ ({ field: { onChange, onBlur, value }, fieldState }) => (
                 <MuiTextField
                     id={ id }
                     type={ type }
@@ -66,8 +64,8 @@ const TextField = (props: Props) => {
                     } }
                     onBlur={ onBlur }
                     value={ value }
-                    error={ !!error }
-                    helperText={ error?.message ?? '' }
+                    error={ !!fieldState.error }
+                    helperText={ fieldState.error?.message ?? '' }
                     disabled={ disabled }
                     multiline={ multiline }
                     rows={ rows }
