@@ -12,7 +12,7 @@ interface Form {
 const onSubmit = jest.fn();
 
 const FormComponent = () => {
-    const { control, errors, handleSubmit } = useForm<Form>({
+    const { control, handleSubmit } = useForm<Form>({
         mode: 'onBlur',
         reValidateMode: 'onChange',
         defaultValues: {
@@ -47,7 +47,6 @@ const FormComponent = () => {
                     name="field"
                     control={ control }
                     label="The Field"
-                    error={ errors.field }
                     options={ options }
                 />
                 <button type="submit">Submit</button>
