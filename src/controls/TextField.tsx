@@ -54,9 +54,9 @@ const TextField = <F extends FieldValues>(props: Props<F>) => {
                     id={ id }
                     type={ type }
                     className={ className }
-                    inputProps={{
+                    inputProps={ {
                         'data-testid': props.testId
-                    }}
+                    } }
                     label={ label }
                     placeholder={ placeholder }
                     onChange={ (event) => {
