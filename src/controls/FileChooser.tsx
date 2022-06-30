@@ -28,20 +28,19 @@ const StyledDiv = styled.div`
 	}
 `;
 
-export const FileChooser = <F extends FieldValues>(props: Props<F>) => {
-    return (
+export const FileChooser = <F extends FieldValues>(props: Props<F>) => (
         <Controller
-            name={props.name}
-            control={props.control}
-            rules={props.rules}
-            render={({ field, fieldState }) => (
+            name={ props.name }
+            control={ props.control }
+            rules={ props.rules }
+            render={ ({ field, fieldState }) => (
                 <StyledDiv>
-                    <Input {...field} type="file" />
-                    <span style={{ color: 'red' }}>
-						{fieldState.error?.message}
+                    <Input { ...field } type="file" />
+                    <span style={ { color: 'red' } }>
+						{ fieldState.error?.message }
+                        { /* eslint-disable-next-line react/jsx-closing-tag-location */ }
 					</span>
                 </StyledDiv>
-            )}
+            ) }
         />
     );
-};
