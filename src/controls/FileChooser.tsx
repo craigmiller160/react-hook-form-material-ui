@@ -17,6 +17,7 @@ interface Props<F extends FieldValues> {
         'valueAsNumber' | 'valueAsDate' | 'setValueAs' | 'disabled'
         >;
     readonly disabled?: boolean;
+    readonly testId?: string;
 }
 
 const StyledDiv = styled.div`
@@ -37,6 +38,9 @@ export const FileChooser = <F extends FieldValues>(props: Props<F>) => (
         render={ ({ field, fieldState }) => (
                 <StyledDiv>
                     <Input
+                        inputProps={ {
+                            'data-testid': props.testId
+                        } }
                         type="file"
                         disabled={ props.disabled }
                         onBlur={ field.onBlur }
