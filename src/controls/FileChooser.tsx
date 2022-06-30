@@ -16,6 +16,7 @@ interface Props<F extends FieldValues> {
         RegisterOptions<F, FieldPath<F>>,
         'valueAsNumber' | 'valueAsDate' | 'setValueAs' | 'disabled'
         >;
+    readonly disabled?: boolean;
 }
 
 const StyledDiv = styled.div`
@@ -35,7 +36,7 @@ export const FileChooser = <F extends FieldValues>(props: Props<F>) => (
             rules={ props.rules }
             render={ ({ field, fieldState }) => (
                 <StyledDiv>
-                    <Input { ...field } type="file" />
+                    <Input { ...field } type="file" disabled={ props.disabled } />
                     <span style={ { color: 'red' } }>
 						{ fieldState.error?.message }
                         { /* eslint-disable-next-line react/jsx-closing-tag-location */ }
