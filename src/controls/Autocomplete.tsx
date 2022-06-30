@@ -14,6 +14,7 @@ interface Props<F extends FieldValues, R> {
     readonly label: string;
     readonly options: Array<SelectOption<R>>;
     readonly className?: string;
+    readonly disabled?: boolean;
 }
 
 const getOptionLabel = <R extends any>(option: string | SelectOption<R>) => {
@@ -31,7 +32,8 @@ const Autocomplete = <F extends FieldValues, R extends any>(props: Props<F, R>) 
         rules,
         label,
         options,
-        className
+        className,
+        disabled
     } = props;
 
     return (
@@ -49,6 +51,7 @@ const Autocomplete = <F extends FieldValues, R extends any>(props: Props<F, R>) 
                     value={ field.value }
                     onChange={ (event, newValue) => field.onChange(newValue) }
                     onBlur={ field.onBlur }
+                    disabled={ disabled }
                     renderInput={ (params) => (
                         <TextField
                             { ...params }
