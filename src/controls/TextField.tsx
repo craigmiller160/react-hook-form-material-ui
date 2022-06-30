@@ -19,6 +19,7 @@ interface Props<F extends FieldValues> {
     multiline?: boolean;
     rows?: number;
     variant?: 'standard' | 'filled' | 'outlined';
+    testId?: string;
 }
 
 const TextField = <F extends FieldValues>(props: Props<F>) => {
@@ -53,6 +54,7 @@ const TextField = <F extends FieldValues>(props: Props<F>) => {
                     id={ id }
                     type={ type }
                     className={ className }
+                    data-testid={props.testId}
                     label={ label }
                     placeholder={ placeholder }
                     onChange={ (event) => {
