@@ -30,18 +30,26 @@ const StyledDiv = styled.div`
 `;
 
 export const FileChooser = <F extends FieldValues>(props: Props<F>) => (
-        <Controller
-            name={ props.name }
-            control={ props.control }
-            rules={ props.rules }
-            render={ ({ field, fieldState }) => (
+    <Controller
+        name={ props.name }
+        control={ props.control }
+        rules={ props.rules }
+        render={ ({ field, fieldState }) => (
                 <StyledDiv>
-                    <Input { ...field } type="file" disabled={ props.disabled } />
+                    <Input
+                        type="file"
+                        disabled={ props.disabled }
+                        onBlur={ field.onBlur }
+                        onChange={ (e) =>
+                            field.onChange(
+                                (e.target as HTMLInputElement).files?.[0]
+                            ) }
+                    />
                     <span style={ { color: 'red' } }>
 						{ fieldState.error?.message }
-                        { /* eslint-disable-next-line react/jsx-closing-tag-location */ }
+                        {/* eslint-disable-next-line react/jsx-closing-tag-location */}
 					</span>
                 </StyledDiv>
             ) }
-        />
-    );
+    />
+);
