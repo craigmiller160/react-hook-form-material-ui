@@ -9,11 +9,19 @@ interface Props<F extends FieldValues, R> {
     readonly id?: string;
     readonly name: FieldPath<F>;
     readonly control: Control<F>;
-    readonly rules?: Omit<RegisterOptions<F, FieldPath<F>>, 'valueAsNumber' | 'valueAsDate' | 'setValueAs' | 'disabled'>;
+    readonly rules?: Omit<RegisterOptions<F, FieldPath<F>>, 'valueAsNumber' |
+        'valueAsDate' | 'setValueAs' | 'disabled'>;
     readonly label: string;
     readonly options: Array<SelectOption<R>>;
     readonly className?: string;
 }
+
+const getOptionLabel = <R extends any>(option: string | SelectOption<R>) => {
+    if (typeof option === 'string') {
+        return option;
+    }
+    return (option as SelectOption<R>).label;
+};
 
 const Autocomplete = <F extends FieldValues, R extends any>(props: Props<F, R>) => {
     const {
@@ -37,6 +45,7 @@ const Autocomplete = <F extends FieldValues, R extends any>(props: Props<F, R>) 
                     className={ className }
                     options={ options }
                     isOptionEqualToValue={ (option, selected) => option.value === selected.value }
+                    getOptionLabel={ getOptionLabel }
                     value={ field.value }
                     onChange={ (event, newValue) => field.onChange(newValue) }
                     onBlur={ field.onBlur }

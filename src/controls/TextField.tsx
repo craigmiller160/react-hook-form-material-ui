@@ -11,7 +11,8 @@ interface Props<F extends FieldValues> {
     readonly control: Control<F>;
     readonly label: string;
     readonly className?: string;
-    readonly rules?: Omit<RegisterOptions<F, FieldPath<F>>, 'valueAsNumber' | 'valueAsDate' | 'setValueAs' | 'disabled'>;
+    readonly rules?: Omit<RegisterOptions<F, FieldPath<F>>, 'valueAsNumber' |
+        'valueAsDate' | 'setValueAs' | 'disabled'>;
     readonly type?: 'text' | 'number' | 'password';
     readonly disabled?: boolean;
     readonly transform?: Transform;
