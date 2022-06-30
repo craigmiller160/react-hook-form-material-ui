@@ -4,12 +4,12 @@ import MuiSwitch from '@mui/material/Switch';
 import FormControlLabel from '@mui/material/FormControlLabel';
 
 interface Props<F extends FieldValues> {
-    id?: string;
-    name: FieldPath<F>;
-    control: Control<F>;
-    label: string;
-    color?: 'primary' | 'secondary' | 'default';
-    className?: string;
+    readonly id?: string;
+    readonly name: FieldPath<F>;
+    readonly control: Control<F>;
+    readonly label: string;
+    readonly color?: 'primary' | 'secondary' | 'default';
+    readonly className?: string;
 }
 
 const Switch = <F extends FieldValues>(props: Props<F>) => {

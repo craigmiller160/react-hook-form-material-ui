@@ -6,20 +6,20 @@ import { RegisterOptions } from 'react-hook-form/dist/types/validator';
 type Transform = (value: string) => any;
 
 interface Props<F extends FieldValues> {
-    id?: string;
-    name: FieldPath<F>;
-    control: Control<F>;
-    label: string;
-    className?: string;
-    rules?: Omit<RegisterOptions<F, FieldPath<F>>, 'valueAsNumber' | 'valueAsDate' | 'setValueAs' | 'disabled'>;
-    type?: 'text' | 'number' | 'password';
-    disabled?: boolean;
-    transform?: Transform;
-    placeholder?: string;
-    multiline?: boolean;
-    rows?: number;
-    variant?: 'standard' | 'filled' | 'outlined';
-    testId?: string;
+    readonly id?: string;
+    readonly name: FieldPath<F>;
+    readonly control: Control<F>;
+    readonly label: string;
+    readonly className?: string;
+    readonly rules?: Omit<RegisterOptions<F, FieldPath<F>>, 'valueAsNumber' | 'valueAsDate' | 'setValueAs' | 'disabled'>;
+    readonly type?: 'text' | 'number' | 'password';
+    readonly disabled?: boolean;
+    readonly transform?: Transform;
+    readonly placeholder?: string;
+    readonly multiline?: boolean;
+    readonly rows?: number;
+    readonly variant?: 'standard' | 'filled' | 'outlined';
+    readonly testId?: string;
 }
 
 const TextField = <F extends FieldValues>(props: Props<F>) => {

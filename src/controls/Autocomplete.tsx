@@ -6,13 +6,13 @@ import { RegisterOptions } from 'react-hook-form/dist/types/validator';
 import { SelectOption } from '../types/form';
 
 interface Props<F extends FieldValues, R> {
-    id?: string;
-    name: FieldPath<F>;
-    control: Control<F>;
-    rules?: Omit<RegisterOptions<F, FieldPath<F>>, 'valueAsNumber' | 'valueAsDate' | 'setValueAs' | 'disabled'>;
-    label: string;
-    options: Array<SelectOption<R>>;
-    className?: string;
+    readonly id?: string;
+    readonly name: FieldPath<F>;
+    readonly control: Control<F>;
+    readonly rules?: Omit<RegisterOptions<F, FieldPath<F>>, 'valueAsNumber' | 'valueAsDate' | 'setValueAs' | 'disabled'>;
+    readonly label: string;
+    readonly options: Array<SelectOption<R>>;
+    readonly className?: string;
 }
 
 const Autocomplete = <F extends FieldValues, R extends any>(props: Props<F, R>) => {
