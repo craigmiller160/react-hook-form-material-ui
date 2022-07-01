@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { MutableRefObject } from 'react';
 import { Input } from '@mui/material';
 import {
     Control,
@@ -18,6 +18,7 @@ interface Props<F extends FieldValues> {
         >;
     readonly disabled?: boolean;
     readonly testId?: string;
+    readonly inputRef?: MutableRefObject<HTMLInputElement>;
 }
 
 const StyledDiv = styled.div`
@@ -39,7 +40,8 @@ export const FileChooser = <F extends FieldValues>(props: Props<F>) => (
                 <StyledDiv>
                     <Input
                         inputProps={ {
-                            'data-testid': props.testId
+                            'data-testid': props.testId,
+                            ref: props.inputRef
                         } }
                         type="file"
                         disabled={ props.disabled }
