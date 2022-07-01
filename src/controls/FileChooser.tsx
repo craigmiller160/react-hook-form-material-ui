@@ -18,7 +18,7 @@ interface Props<F extends FieldValues> {
         >;
     readonly disabled?: boolean;
     readonly testId?: string;
-    readonly inputRef?: MutableRefObject<HTMLInputElement>;
+    readonly inputRef?: MutableRefObject<HTMLInputElement | undefined>;
 }
 
 const StyledDiv = styled.div`
