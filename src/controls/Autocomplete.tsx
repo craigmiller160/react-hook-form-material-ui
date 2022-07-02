@@ -12,7 +12,7 @@ interface Props<F extends FieldValues, R> {
     readonly rules?: Omit<RegisterOptions<F, FieldPath<F>>, 'valueAsNumber' |
         'valueAsDate' | 'setValueAs' | 'disabled'>;
     readonly label: string;
-    readonly options: Array<SelectOption<R>>;
+    readonly options: ReadonlyArray<SelectOption<R>>;
     readonly className?: string;
     readonly disabled?: boolean;
 }
