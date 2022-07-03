@@ -20,7 +20,7 @@
     "build": "web-config-scripts lint && web-config-scripts test && web-config-scripts buildTSLib",
     "forceBuild": "web-config-scripts buildTSLib",
     "lint": "craig-lint",
-    "test": "web-config-scripts test",
+    "test": "craig-test",
     "prepare": "husky install"
   },
   "peerDependencies": {
@@ -38,6 +38,8 @@
     "@craigmiller160/eslint-config-react": "^1.0.1",
     "@craigmiller160/eslint-config-tree-shaking-import-restrictions": "^1.0.0",
     "@craigmiller160/eslint-config-ts": "^1.0.1",
+    "@craigmiller160/jest-config": "^1.0.3",
+    "@craigmiller160/jest-config-ts": "^1.0.1",
     "@craigmiller160/prettier-config": "^1.0.0",
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
