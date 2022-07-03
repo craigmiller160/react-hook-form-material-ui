@@ -46,7 +46,6 @@ export const FileChooser = <F extends FieldValues>(props: Props<F>) => (
 				/>
 				<span style={{ color: 'red' }}>
 					{fieldState.error?.message}
-					{/* eslint-disable-next-line react/jsx-closing-tag-location */}
 				</span>
 			</StyledDiv>
 		)}
