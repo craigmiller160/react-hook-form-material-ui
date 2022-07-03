@@ -32,7 +32,6 @@
     "@craigmiller160/eslint-config-tree-shaking-import-restrictions": "^1.0.0",
     "@craigmiller160/eslint-config-ts": "^1.0.1",
     "@craigmiller160/prettier-config": "^1.0.0",
-    "@craigmiller160/react-web-config": "^2.8.2",
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
     "@mui/material": "^5.8.6",
