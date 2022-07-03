@@ -16,8 +16,7 @@
     "*.{ts,tsx}": "eslint --fix --max-warnings=0"
   },
   "scripts": {
-    "start": "web-config-scripts devServer",
-    "build": "web-config-scripts lint && web-config-scripts test && web-config-scripts buildTSLib",
+    "build": "yarn lint && yarn test && yarn forceBuild",
     "forceBuild": "web-config-scripts buildTSLib",
     "lint": "craig-lint",
     "test": "craig-test",
