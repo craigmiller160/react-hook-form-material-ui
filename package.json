@@ -16,7 +16,7 @@
     "start": "web-config-scripts devServer",
     "build": "web-config-scripts lint && web-config-scripts test && web-config-scripts buildTSLib",
     "forceBuild": "web-config-scripts buildTSLib",
-    "lint": "web-config-scripts lint",
+    "lint": "craig-lint",
     "test": "web-config-scripts test"
   },
   "peerDependencies": {
@@ -25,6 +25,13 @@
     "react-hook-form": ">=7.33.0"
   },
   "devDependencies": {
+    "@craigmiller160/eslint-config-jest": "^1.0.0",
+    "@craigmiller160/eslint-config-js": "^1.0.0",
+    "@craigmiller160/eslint-config-prettier": "^1.0.0",
+    "@craigmiller160/eslint-config-react": "^1.0.1",
+    "@craigmiller160/eslint-config-tree-shaking-import-restrictions": "^1.0.0",
+    "@craigmiller160/eslint-config-ts": "^1.0.1",
+    "@craigmiller160/prettier-config": "^1.0.0",
     "@craigmiller160/react-web-config": "^2.8.2",
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
