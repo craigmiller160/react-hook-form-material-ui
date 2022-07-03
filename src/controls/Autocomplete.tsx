@@ -1,4 +1,4 @@
-import React from 'react';
+/* eslint-disable @typescript-eslint/no-unnecessary-type-constraint */
 import { Control, Controller, FieldPath, FieldValues } from 'react-hook-form';
 import MuiAutocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
@@ -15,6 +15,7 @@ interface Props<F extends FieldValues, R> {
 	readonly disabled?: boolean;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const getOptionLabel = <R extends any>(option: string | SelectOption<R>) => {
 	if (typeof option === 'string') {
 		return option;
@@ -22,9 +23,7 @@ const getOptionLabel = <R extends any>(option: string | SelectOption<R>) => {
 	return (option as SelectOption<R>).label;
 };
 
-const Autocomplete = <F extends FieldValues, R extends any>(
-	props: Props<F, R>
-) => {
+const Autocomplete = <F extends FieldValues, R>(props: Props<F, R>) => {
 	const { id, name, control, rules, label, options, className, disabled } =
 		props;
 

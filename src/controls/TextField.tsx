@@ -3,6 +3,7 @@ import { Control, Controller, FieldPath, FieldValues } from 'react-hook-form';
 import MuiTextField from '@mui/material/TextField';
 import { Rules } from '../types/form';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Transform = (value: string) => any;
 
 interface Props<F extends FieldValues> {
