@@ -17,7 +17,7 @@
   },
   "scripts": {
     "build": "yarn lint && yarn test && yarn forceBuild",
-    "forceBuild": "web-config-scripts buildTSLib",
+    "forceBuild": "rm -rf ./lib && tsc",
     "lint": "craig-lint",
     "test": "craig-test",
     "prepare": "husky install"
