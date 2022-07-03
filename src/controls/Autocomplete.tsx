@@ -2,15 +2,13 @@ import React from 'react';
 import { Control, Controller, FieldPath, FieldValues } from 'react-hook-form';
 import MuiAutocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
-import { RegisterOptions } from 'react-hook-form/dist/types/validator';
-import { SelectOption } from '../types/form';
+import { Rules, SelectOption } from '../types/form';
 
 interface Props<F extends FieldValues, R> {
     readonly id?: string;
     readonly name: FieldPath<F>;
     readonly control: Control<F>;
-    readonly rules?: Omit<RegisterOptions<F, FieldPath<F>>, 'valueAsNumber' |
-        'valueAsDate' | 'setValueAs' | 'disabled'>;
+    readonly rules?: Rules<F>;
     readonly label: string;
     readonly options: ReadonlyArray<SelectOption<R>>;
     readonly className?: string;

@@ -4,18 +4,15 @@ import {
     Control,
     FieldPath,
     FieldValues,
-    Controller,
-    RegisterOptions
+    Controller
 } from 'react-hook-form';
 import styled from '@emotion/styled';
+import { Rules } from '../types/form';
 
 interface Props<F extends FieldValues> {
     readonly name: FieldPath<F>;
     readonly control: Control<F>;
-    readonly rules?: Omit<
-        RegisterOptions<F, FieldPath<F>>,
-        'valueAsNumber' | 'valueAsDate' | 'setValueAs' | 'disabled'
-        >;
+    readonly rules?: Rules<F>;
     readonly disabled?: boolean;
     readonly testId?: string;
     readonly inputRef?: MutableRefObject<HTMLInputElement | undefined>;

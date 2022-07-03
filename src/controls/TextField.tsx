@@ -1,7 +1,7 @@
 import React from 'react';
 import { Control, Controller, FieldPath, FieldValues } from 'react-hook-form';
 import MuiTextField from '@mui/material/TextField';
-import { RegisterOptions } from 'react-hook-form/dist/types/validator';
+import { Rules } from '../types/form';
 
 type Transform = (value: string) => any;
 
@@ -11,8 +11,7 @@ interface Props<F extends FieldValues> {
     readonly control: Control<F>;
     readonly label: string;
     readonly className?: string;
-    readonly rules?: Omit<RegisterOptions<F, FieldPath<F>>, 'valueAsNumber' |
-        'valueAsDate' | 'setValueAs' | 'disabled'>;
+    readonly rules?: Rules<F>;
     readonly type?: 'text' | 'number' | 'password';
     readonly disabled?: boolean;
     readonly transform?: Transform;
