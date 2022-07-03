@@ -15,6 +15,7 @@ interface FormComponentProps {
 		RegisterOptions<Form, FieldPath<Form>>,
 		'valueAsNumber' | 'valueAsDate' | 'setValueAs' | 'disabled'
 	>;
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	transform?: (value: string) => any;
 	textArea?: boolean;
 }
@@ -56,7 +57,7 @@ describe('TextField', () => {
 		await waitFor(() => render(<FormComponent type="text" />));
 
 		const textField = screen.getByLabelText('The Field');
-		userEvent.type(textField, 'Hello World');
+		await userEvent.type(textField, 'Hello World');
 
 		await waitFor(() => userEvent.click(screen.getByText('Submit')));
 		expect(onSubmit).toHaveBeenCalledWith({
@@ -70,16 +71,16 @@ describe('TextField', () => {
 		const textField = screen.getByLabelText('The Field');
 		const submit = screen.getByText('Submit');
 
-		userEvent.clear(textField);
-		userEvent.type(textField, '12345');
+		await userEvent.clear(textField);
+		await userEvent.type(textField, '12345');
 
 		await waitFor(() => userEvent.click(submit));
 		expect(onSubmit).toHaveBeenNthCalledWith(1, {
 			field: 12345
 		});
 
-		userEvent.clear(textField);
-		userEvent.type(textField, 'ABC');
+		await userEvent.clear(textField);
+		await userEvent.type(textField, 'ABC');
 
 		await waitFor(() => userEvent.click(submit));
 		expect(onSubmit).toHaveBeenNthCalledWith(2, {
@@ -98,7 +99,7 @@ describe('TextField', () => {
 		);
 
 		const textField = screen.getByLabelText('The Field');
-		userEvent.type(textField, 'Hello World');
+		await userEvent.type(textField, 'Hello World');
 
 		await waitFor(() => userEvent.click(screen.getByText('Submit')));
 		expect(onSubmit).toHaveBeenCalledWith({
