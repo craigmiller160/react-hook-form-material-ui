@@ -43,14 +43,11 @@ const Autocomplete = <F extends FieldValues, R>(props: Props<F, R>) => {
 					}
 					getOptionLabel={getOptionLabel}
 					value={field.value}
-					onChange={(event, newValue, arg, arg2) => {
-						console.log('OnChange', newValue, arg, arg2); // eslint-disable-line
+					onChange={(event, newValue) => {
 						field.onChange(newValue);
+						props.dynamicSubmit?.();
 					}}
-					onBlur={() => {
-						console.log('OnBlur'); // eslint-disable-line
-						field.onBlur();
-					}}
+					onBlur={field.onBlur}
 					disabled={disabled}
 					renderInput={(params) => (
 						<TextField
