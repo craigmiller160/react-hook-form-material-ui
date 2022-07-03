@@ -47,7 +47,10 @@ const Autocomplete = <F extends FieldValues, R>(props: Props<F, R>) => {
 						console.log('OnChange', newValue, arg, arg2); // eslint-disable-line
 						field.onChange(newValue);
 					}}
-					onBlur={field.onBlur}
+					onBlur={() => {
+						console.log('OnBlur'); // eslint-disable-line
+						field.onBlur();
+					}}
 					disabled={disabled}
 					renderInput={(params) => (
 						<TextField
