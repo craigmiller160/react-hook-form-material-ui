@@ -13,6 +13,7 @@ interface Props<F extends FieldValues, R> {
 	readonly options: ReadonlyArray<SelectOption<R>>;
 	readonly className?: string;
 	readonly disabled?: boolean;
+	readonly dynamicSubmit?: () => void;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -42,7 +43,10 @@ const Autocomplete = <F extends FieldValues, R>(props: Props<F, R>) => {
 					}
 					getOptionLabel={getOptionLabel}
 					value={field.value}
-					onChange={(event, newValue) => field.onChange(newValue)}
+					onChange={(event, newValue, arg, arg2) => {
+						console.log('OnChange', newValue, arg, arg2); // eslint-disable-line
+						field.onChange(newValue);
+					}}
 					onBlur={field.onBlur}
 					disabled={disabled}
 					renderInput={(params) => (
