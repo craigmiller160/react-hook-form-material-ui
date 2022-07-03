@@ -53,6 +53,10 @@ const FormComponent = (props: FormComponentProps) => {
 };
 
 describe('TextField', () => {
+	beforeEach(() => {
+		jest.clearAllMocks();
+	});
+
 	it('accepts input for type text', async () => {
 		await waitFor(() => render(<FormComponent type="text" />));
 
