@@ -1,5 +1,5 @@
-import { SelectOption, Rules } from '../types/form';
-import { Controller, FieldPath, FieldValues, Control } from 'react-hook-form';
+import { DefaultProps, SelectOption } from '../types/form';
+import { Controller, FieldValues } from 'react-hook-form';
 import {
 	FormControl,
 	FormHelperText,
@@ -8,14 +8,8 @@ import {
 	Select as MuiSelect
 } from '@mui/material';
 
-interface Props<F extends FieldValues> {
-	readonly name: FieldPath<F>;
+interface Props<F extends FieldValues> extends DefaultProps<F> {
 	readonly options: ReadonlyArray<SelectOption<string | number>>;
-	readonly control: Control<F>;
-	readonly rules?: Rules<F>;
-	readonly label: string;
-	readonly disabled?: boolean;
-	readonly dynamicSubmit?: () => void;
 }
 
 export const Select = <F extends FieldValues>(props: Props<F>) => {
@@ -29,9 +23,14 @@ export const Select = <F extends FieldValues>(props: Props<F>) => {
 					<InputLabel>{props.label}</InputLabel>
 					<MuiSelect
 						{...field}
+						className={props.className}
+						inputProps={{
+							'data-testid': props.testId
+						}}
+						id={props.id}
 						onChange={(event) => {
 							field.onChange(event);
-							props.dynamicSubmit?.();
+							props.onValueHasChanged?.();
 						}}
 						label={props.label}
 						error={!!fieldState.error}
