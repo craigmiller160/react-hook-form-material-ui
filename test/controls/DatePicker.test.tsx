@@ -57,19 +57,19 @@ describe('DatePicker', () => {
 		// add window.matchMedia
 		// this is necessary for the date picker to be rendered in desktop mode.
 		// if this is not provided, the mobile mode is rendered, which might lead to unexpected behavior
-		Object.defineProperty(window, "matchMedia", {
+		Object.defineProperty(window, 'matchMedia', {
 			writable: true,
 			value: (query: any) => ({
 				media: query,
 				// this is the media query that @material-ui/pickers uses to determine if a device is a desktop device
-				matches: query === "(pointer: fine)",
+				matches: query === '(pointer: fine)',
 				onchange: () => {},
 				addEventListener: () => {},
 				removeEventListener: () => {},
 				addListener: () => {},
 				removeListener: () => {},
-				dispatchEvent: () => false,
-			}),
+				dispatchEvent: () => false
+			})
 		});
 	});
 
@@ -105,7 +105,9 @@ describe('DatePicker', () => {
 			/>
 		);
 
-		await userEvent.type(screen.getByLabelText('My Date'), '01012022', { delay: 1 });
+		await userEvent.type(screen.getByLabelText('My Date'), '01012022', {
+			delay: 1
+		});
 		await userEvent.click(screen.getByText('Random Text'));
 		expect(valueHasChangedCalled).toEqual(true);
 		expect(screen.getByLabelText('My Date')).toHaveValue('01/01/2022');
