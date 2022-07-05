@@ -1,15 +1,10 @@
 import React, { MutableRefObject } from 'react';
 import { Input } from '@mui/material';
-import { Control, FieldPath, FieldValues, Controller } from 'react-hook-form';
+import { Controller, FieldValues } from 'react-hook-form';
 import styled from '@emotion/styled';
-import { Rules } from '../types/form';
+import { DefaultProps } from '../types/form';
 
-interface Props<F extends FieldValues> {
-	readonly name: FieldPath<F>;
-	readonly control: Control<F>;
-	readonly rules?: Rules<F>;
-	readonly disabled?: boolean;
-	readonly testId?: string;
+interface Props<F extends FieldValues> extends DefaultProps<F> {
 	readonly inputRef?: MutableRefObject<HTMLInputElement | undefined>;
 }
 
@@ -23,14 +18,16 @@ const StyledDiv = styled.div`
 	}
 `;
 
+// TODO need a label here
 export const FileChooser = <F extends FieldValues>(props: Props<F>) => (
 	<Controller
 		name={props.name}
 		control={props.control}
 		rules={props.rules}
 		render={({ field, fieldState }) => (
-			<StyledDiv>
+			<StyledDiv className={props.className}>
 				<Input
+					id={props.id}
 					inputProps={{
 						'data-testid': props.testId,
 						ref: props.inputRef
@@ -38,11 +35,12 @@ export const FileChooser = <F extends FieldValues>(props: Props<F>) => (
 					type="file"
 					disabled={props.disabled}
 					onBlur={field.onBlur}
-					onChange={(e) =>
+					onChange={(e) => {
 						field.onChange(
 							(e.target as HTMLInputElement).files?.[0]
-						)
-					}
+						);
+						props.onValueHasChanged?.();
+					}}
 				/>
 				<span style={{ color: 'red' }}>
 					{fieldState.error?.message}
