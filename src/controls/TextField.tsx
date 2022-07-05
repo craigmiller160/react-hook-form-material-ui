@@ -58,6 +58,7 @@ const TextField = <F extends FieldValues>(props: Props<F>) => {
 						} else {
 							onChange(event.target.value);
 						}
+						props.onValueHasChanged?.();
 					}}
 					onBlur={onBlur}
 					value={value}
