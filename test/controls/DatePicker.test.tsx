@@ -1,7 +1,10 @@
 import { DatePicker, ValueHasChanged } from '../../src';
 import { useForm } from 'react-hook-form';
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { LocalizationProvider } from '@mui/x-date-pickers';
 
 interface Form {
 	readonly field: Date | null;
@@ -19,15 +22,17 @@ const FormComponent = (props: FormComponentProps) => {
 		}
 	});
 	return (
-		<form onSubmit={handleSubmit(props.onSubmit)}>
-			<DatePicker
-				control={control}
-				name="field"
-				label="My Checkbox"
-				onValueHasChanged={props.onValueHasChanged}
-			/>
-			<button type="submit">Submit</button>
-		</form>
+		<LocalizationProvider dateAdapter={AdapterDateFns}>
+			<form onSubmit={handleSubmit(props.onSubmit)}>
+				<DatePicker
+					control={control}
+					name="field"
+					label="My Date"
+					onValueHasChanged={props.onValueHasChanged}
+				/>
+				<button type="submit">Submit</button>
+			</form>
+		</LocalizationProvider>
 	);
 };
 
@@ -63,6 +68,10 @@ describe('DatePicker', () => {
 				}}
 			/>
 		);
-		throw new Error();
+		await userEvent.type(screen.getByLabelText('My Date'), '01/01/2022');
+		expect(valueHasChangedCalled).toEqual(true);
+		await userEvent.click(screen.getByText('Submit'));
+		expect(receivedValues).not.toBeUndefined();
+		expect(receivedValues?.field).toBeInstanceOf(Date);
 	});
 });
