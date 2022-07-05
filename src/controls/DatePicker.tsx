@@ -1,22 +1,13 @@
-import { Control, FieldPath, FieldValues, Controller } from 'react-hook-form';
-import { Rules } from '../types/form';
+import { Controller, FieldValues } from 'react-hook-form';
+import { DefaultProps, Rules } from '../types/form';
 import { DatePicker as MuiDatePicker } from '@mui/x-date-pickers';
 import MuiTextField from '@mui/material/TextField';
 import isValid from 'date-fns/isValid/index';
 
-interface Props<F extends FieldValues> {
-	readonly name: FieldPath<F>;
-	readonly control: Control<F>;
-	readonly label: string;
-	readonly rules?: Rules<F>;
-	readonly disabled?: boolean;
-	readonly dynamicSubmit?: () => void;
-}
-
 const validate = (value: Date): string | undefined =>
 	isValid(value) ? undefined : 'Must be valid date';
 
-export const DatePicker = <F extends FieldValues>(props: Props<F>) => {
+export const DatePicker = <F extends FieldValues>(props: DefaultProps<F>) => {
 	const rules: Rules<F> = {
 		...(props.rules ?? {}),
 		validate
@@ -29,10 +20,11 @@ export const DatePicker = <F extends FieldValues>(props: Props<F>) => {
 			render={({ field, fieldState }) => (
 				<MuiDatePicker
 					{...field}
+					className={props.className}
 					onChange={(date, stringValue) => {
 						field.onChange(date, stringValue);
 						if (stringValue === undefined) {
-							props.dynamicSubmit?.();
+							props.onValueHasChanged?.();
 						}
 					}}
 					label={props.label}
@@ -40,9 +32,10 @@ export const DatePicker = <F extends FieldValues>(props: Props<F>) => {
 					renderInput={(params) => (
 						<MuiTextField
 							{...params}
+							id={props.id}
 							onBlur={(event) => {
 								params?.onBlur?.(event);
-								props.dynamicSubmit?.();
+								props.onValueHasChanged?.();
 							}}
 							error={!!fieldState.error}
 							helperText={fieldState.error?.message ?? ''}
