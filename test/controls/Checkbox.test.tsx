@@ -9,7 +9,8 @@ interface Form {
 }
 
 interface FormComponentProps {
-	readonly onSubmit: (values: Form) => void;
+	readonly onSubmit?: (values: Form) => void;
+	readonly dynamicSubmit?: () => void;
 }
 
 const FormComponent = (props: FormComponentProps) => {
@@ -18,9 +19,15 @@ const FormComponent = (props: FormComponentProps) => {
 			field: false
 		}
 	});
+	const onSubmit = props.onSubmit ? handleSubmit(props.onSubmit) : undefined;
 	return (
-		<form onSubmit={handleSubmit(props.onSubmit)}>
-			<Checkbox control={control} name="field" label="My Checkbox" />
+		<form onSubmit={onSubmit}>
+			<Checkbox
+				control={control}
+				name="field"
+				label="My Checkbox"
+				dynamicSubmit={props.dynamicSubmit}
+			/>
 			<button type="submit">Submit</button>
 		</form>
 	);
@@ -48,6 +55,15 @@ describe('Checkbox', () => {
 	});
 
 	it('does dynamic submit', async () => {
-		throw new Error();
+		let dynamicSubmitCalled = false;
+		render(
+			<FormComponent
+				dynamicSubmit={() => {
+					dynamicSubmitCalled = true;
+				}}
+			/>
+		);
+		await userEvent.click(screen.getByLabelText('My Checkbox'));
+		expect(dynamicSubmitCalled).toEqual(true);
 	});
 });
