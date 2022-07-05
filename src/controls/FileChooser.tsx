@@ -15,6 +15,8 @@ const StyledDiv = styled.div`
 
 	& .MuiFormControlLabel-root {
 		width: 100%;
+		margin: 0;
+		padding: 0;
 
 		& .MuiInput-root {
 			width: 100%;
