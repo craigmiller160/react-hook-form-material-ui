@@ -9,6 +9,7 @@ interface Form {
 }
 
 const onSubmit = jest.fn();
+const onValueHasChanged = jest.fn();
 
 const FormComponent = () => {
 	const { control, handleSubmit } = useForm<Form>({
@@ -22,7 +23,12 @@ const FormComponent = () => {
 	return (
 		<div>
 			<form onSubmit={handleSubmit((values) => onSubmit(values))}>
-				<Switch name="field" control={control} label="The Field" />
+				<Switch
+					name="field"
+					control={control}
+					label="The Field"
+					onValueHasChanged={onValueHasChanged}
+				/>
 				<button type="submit">Submit</button>
 			</form>
 		</div>
@@ -30,11 +36,15 @@ const FormComponent = () => {
 };
 
 describe('Switch', () => {
+	beforeEach(() => {
+		jest.clearAllMocks();
+	});
 	it('works', async () => {
 		await waitFor(() => render(<FormComponent />));
 
 		const input = screen.getByLabelText('The Field');
-		userEvent.click(input);
+		await userEvent.click(input);
+		expect(onValueHasChanged).toHaveBeenCalled();
 
 		await waitFor(() => userEvent.click(screen.getByText('Submit')));
 		expect(onSubmit).toHaveBeenCalledWith({
