@@ -5,7 +5,7 @@ describe('DatePicker', () => {
 		throw new Error();
 	});
 
-	it('does dynamic submit', async () => {
+	it('can type date', async () => {
 		throw new Error();
 	});
 });
