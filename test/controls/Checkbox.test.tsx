@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form';
-import { Checkbox } from '../../src';
+import { Checkbox, ValueHasChanged } from '../../src';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
@@ -9,8 +9,8 @@ interface Form {
 }
 
 interface FormComponentProps {
-	readonly onSubmit?: (values: Form) => void;
-	readonly dynamicSubmit?: () => void;
+	readonly onSubmit: (values: Form) => void;
+	readonly onValueHasChanged: ValueHasChanged;
 }
 
 const FormComponent = (props: FormComponentProps) => {
@@ -19,14 +19,13 @@ const FormComponent = (props: FormComponentProps) => {
 			field: false
 		}
 	});
-	const onSubmit = props.onSubmit ? handleSubmit(props.onSubmit) : undefined;
 	return (
-		<form onSubmit={onSubmit}>
+		<form onSubmit={handleSubmit(props.onSubmit)}>
 			<Checkbox
 				control={control}
 				name="field"
 				label="My Checkbox"
-				dynamicSubmit={props.dynamicSubmit}
+				onValueHasChanged={props.onValueHasChanged}
 			/>
 			<button type="submit">Submit</button>
 		</form>
@@ -34,8 +33,10 @@ const FormComponent = (props: FormComponentProps) => {
 };
 
 describe('Checkbox', () => {
+	let valueHasChangedCalled = false;
 	let receivedValues: Form | undefined;
 	beforeEach(() => {
+		valueHasChangedCalled = false;
 		receivedValues = undefined;
 	});
 
@@ -45,25 +46,16 @@ describe('Checkbox', () => {
 				onSubmit={(values) => {
 					receivedValues = values;
 				}}
-			/>
-		);
-		await userEvent.click(screen.getByLabelText('My Checkbox'));
-		await userEvent.click(screen.getByText('Submit'));
-		expect(receivedValues).toEqual({
-			field: true
-		});
-	});
-
-	it('does dynamic submit', async () => {
-		let dynamicSubmitCalled = false;
-		render(
-			<FormComponent
-				dynamicSubmit={() => {
-					dynamicSubmitCalled = true;
+				onValueHasChanged={() => {
+					valueHasChangedCalled = true;
 				}}
 			/>
 		);
 		await userEvent.click(screen.getByLabelText('My Checkbox'));
-		expect(dynamicSubmitCalled).toEqual(true);
+		expect(valueHasChangedCalled).toEqual(true);
+		await userEvent.click(screen.getByText('Submit'));
+		expect(receivedValues).toEqual({
+			field: true
+		});
 	});
 });

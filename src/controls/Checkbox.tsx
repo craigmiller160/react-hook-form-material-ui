@@ -1,18 +1,13 @@
-import { Control, Controller, FieldPath, FieldValues } from 'react-hook-form';
+import { Controller, FieldValues } from 'react-hook-form';
 import { FormControlLabel } from '@mui/material';
 import MuiCheckbox from '@mui/material/Checkbox';
+import { DefaultProps } from '../types/form';
 
-interface Props<F extends FieldValues> {
-	readonly control: Control<F>;
-	readonly name: FieldPath<F>;
-	readonly label: string;
-	readonly dynamicSubmit?: () => void;
-}
-
-export const Checkbox = <F extends FieldValues>(props: Props<F>) => (
+export const Checkbox = <F extends FieldValues>(props: DefaultProps<F>) => (
 	<Controller
 		name={props.name}
 		control={props.control}
+		rules={props.rules}
 		render={({ field }) => (
 			<FormControlLabel
 				label={props.label}
@@ -21,7 +16,7 @@ export const Checkbox = <F extends FieldValues>(props: Props<F>) => (
 						{...field}
 						onChange={(event) => {
 							field.onChange(event);
-							props.dynamicSubmit?.();
+							props.onValueHasChanged?.();
 						}}
 					/>
 				}
