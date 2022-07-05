@@ -2,7 +2,6 @@ import { useForm } from 'react-hook-form';
 import { Checkbox, ValueHasChanged } from '../../src';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import React from 'react';
 
 interface Form {
 	readonly field: boolean;
