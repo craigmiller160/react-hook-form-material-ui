@@ -9,6 +9,7 @@ interface Form {
 }
 
 const onSubmit = jest.fn();
+const onValueHasChanged = jest.fn();
 
 const FormComponent = () => {
 	const { control, handleSubmit } = useForm<Form>({
@@ -47,6 +48,7 @@ const FormComponent = () => {
 					control={control}
 					label="The Field"
 					options={options}
+					onValueHasChanged={onValueHasChanged}
 				/>
 				<button type="submit">Submit</button>
 			</form>
@@ -55,6 +57,9 @@ const FormComponent = () => {
 };
 
 describe('Autocomplete', () => {
+	beforeEach(() => {
+		jest.clearAllMocks();
+	});
 	it('can select option', async () => {
 		await waitFor(() => render(<FormComponent />));
 
@@ -66,6 +71,7 @@ describe('Autocomplete', () => {
 		expect(screen.queryByText('Third')).toBeVisible();
 		expect(screen.queryByText('Fourth')).toBeVisible();
 		await waitFor(() => userEvent.click(screen.getByText('Third')));
+		expect(onValueHasChanged).toHaveBeenCalled();
 
 		await waitFor(() => userEvent.click(screen.getByText('Submit')));
 		expect(onSubmit).toHaveBeenCalledWith({
@@ -74,9 +80,5 @@ describe('Autocomplete', () => {
 				value: 3
 			}
 		});
-	});
-
-	it('does dynamic submit', async () => {
-		throw new Error();
 	});
 });

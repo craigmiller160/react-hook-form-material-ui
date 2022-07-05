@@ -14,6 +14,9 @@ export const Checkbox = <F extends FieldValues>(props: DefaultProps<F>) => (
 				control={
 					<MuiCheckbox
 						{...field}
+						id={props.id}
+						className={props.className}
+						disabled={props.disabled}
 						onChange={(event) => {
 							field.onChange(event);
 							props.onValueHasChanged?.();

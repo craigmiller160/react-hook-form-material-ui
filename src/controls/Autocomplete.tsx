@@ -1,19 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unnecessary-type-constraint */
-import { Control, Controller, FieldPath, FieldValues } from 'react-hook-form';
+import { Controller, FieldValues } from 'react-hook-form';
 import MuiAutocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
-import { Rules, SelectOption } from '../types/form';
+import { DefaultProps, SelectOption } from '../types/form';
 
-interface Props<F extends FieldValues, R> {
-	readonly id?: string;
-	readonly name: FieldPath<F>;
-	readonly control: Control<F>;
-	readonly rules?: Rules<F>;
-	readonly label: string;
+interface Props<F extends FieldValues, R> extends DefaultProps<F> {
 	readonly options: ReadonlyArray<SelectOption<R>>;
-	readonly className?: string;
-	readonly disabled?: boolean;
-	readonly dynamicSubmit?: () => void;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -45,7 +37,7 @@ const Autocomplete = <F extends FieldValues, R>(props: Props<F, R>) => {
 					value={field.value}
 					onChange={(event, newValue) => {
 						field.onChange(newValue);
-						props.dynamicSubmit?.();
+						props.onValueHasChanged?.();
 					}}
 					onBlur={field.onBlur}
 					disabled={disabled}

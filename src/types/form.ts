@@ -14,6 +14,9 @@ export type Rules<F extends FieldValues> = Omit<
 export type ValueHasChanged = () => void;
 
 export interface DefaultProps<F extends FieldValues> {
+	readonly id?: string;
+	readonly className?: string;
+	readonly disabled?: boolean;
 	readonly control: Control<F>;
 	readonly name: FieldPath<F>;
 	readonly label: string;
