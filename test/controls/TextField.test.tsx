@@ -21,6 +21,7 @@ interface FormComponentProps {
 }
 
 const onSubmit = jest.fn();
+const onValueHasChanged = jest.fn();
 
 const FormComponent = (props: FormComponentProps) => {
 	const defaultValue = props.type ? '' : 0;
@@ -45,6 +46,7 @@ const FormComponent = (props: FormComponentProps) => {
 					transform={props.transform}
 					multiline={props.textArea}
 					rows={props.textArea ? 5 : 0}
+					onValueHasChanged={onValueHasChanged}
 				/>
 				<button type="submit">Submit</button>
 			</form>
@@ -62,6 +64,7 @@ describe('TextField', () => {
 
 		const textField = screen.getByLabelText('The Field');
 		await userEvent.type(textField, 'Hello World');
+		expect(onValueHasChanged).toHaveBeenCalled();
 
 		await waitFor(() => userEvent.click(screen.getByText('Submit')));
 		expect(onSubmit).toHaveBeenCalledWith({
