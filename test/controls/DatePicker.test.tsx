@@ -5,6 +5,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers';
+import format from 'date-fns/format/index';
 
 interface Form {
 	readonly field: Date | null;
@@ -47,7 +48,9 @@ describe('DatePicker', () => {
 	});
 
 	it('can select date', async () => {
-		render(
+		const todayFormatted = format(new Date(), 'MMM d, yyyy');
+
+		const renderResult = render(
 			<FormComponent
 				onSubmit={(values) => {
 					receivedValues = values;
@@ -57,7 +60,26 @@ describe('DatePicker', () => {
 				}}
 			/>
 		);
-		throw new Error();
+		const dateChooserButton = renderResult.container.querySelector(
+			'button[aria-label = "Choose date"]'
+		);
+		expect(dateChooserButton).not.toBeNull();
+		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+		await userEvent.click(dateChooserButton!);
+
+		const popupDialog = screen.getByRole('dialog');
+
+		const selectedDateButton = popupDialog.querySelector(
+			`button[aria-label = "${todayFormatted}"]`
+		);
+		expect(selectedDateButton).not.toBeNull();
+		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+		await userEvent.click(selectedDateButton!);
+
+		expect(valueHasChangedCalled).toEqual(true);
+		await userEvent.click(screen.getByText('Submit'));
+		expect(receivedValues).not.toBeUndefined();
+		expect(receivedValues?.field).toBeInstanceOf(Date); // TODO validate date value
 	});
 
 	it('can type date', async () => {
@@ -80,6 +102,6 @@ describe('DatePicker', () => {
 		expect(screen.getByLabelText('My Date')).toHaveValue('01/01/2022');
 		await userEvent.click(screen.getByText('Submit'));
 		expect(receivedValues).not.toBeUndefined();
-		expect(receivedValues?.field).toBeInstanceOf(Date);
+		expect(receivedValues?.field).toBeInstanceOf(Date); // TODO validate date value
 	});
 });
