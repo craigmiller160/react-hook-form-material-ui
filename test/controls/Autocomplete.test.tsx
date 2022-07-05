@@ -75,4 +75,8 @@ describe('Autocomplete', () => {
 			}
 		});
 	});
+
+	it('does dynamic submit', async () => {
+		throw new Error();
+	});
 });
