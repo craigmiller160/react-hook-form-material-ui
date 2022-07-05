@@ -33,6 +33,9 @@ export const DatePicker = <F extends FieldValues>(props: DefaultProps<F>) => {
 						<MuiTextField
 							{...params}
 							id={props.id}
+							inputProps={{
+								'data-testid': props.testId
+							}}
 							onBlur={(event) => {
 								params.onBlur?.(event);
 								props.onValueHasChanged?.();

@@ -44,6 +44,9 @@ const Autocomplete = <F extends FieldValues, R>(props: Props<F, R>) => {
 					renderInput={(params) => (
 						<TextField
 							{...params}
+							inputProps={{
+								'data-testid': props.testId
+							}}
 							label={label}
 							variant="outlined"
 							error={!!fieldState.error}

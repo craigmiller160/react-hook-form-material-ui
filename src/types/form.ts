@@ -15,6 +15,7 @@ export type ValueHasChanged = () => void;
 
 export interface DefaultProps<F extends FieldValues> {
 	readonly id?: string;
+	readonly testId?: string;
 	readonly className?: string;
 	readonly disabled?: boolean;
 	readonly control: Control<F>;
