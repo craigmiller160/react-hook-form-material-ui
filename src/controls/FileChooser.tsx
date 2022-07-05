@@ -13,8 +13,12 @@ const StyledDiv = styled.div`
 	flex-direction: column;
 	align-items: flex-start;
 
-	> * {
+	& .MuiFormControlLabel-root {
 		width: 100%;
+
+		& .MuiInput-root {
+			width: 100%;
+		}
 	}
 `;
 
@@ -26,6 +30,7 @@ export const FileChooser = <F extends FieldValues>(props: Props<F>) => (
 		render={({ field, fieldState }) => (
 			<StyledDiv className={props.className}>
 				<FormControlLabel
+					labelPlacement="bottom"
 					control={
 						<Input
 							id={props.id}
