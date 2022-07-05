@@ -22,6 +22,7 @@ export const DatePicker = <F extends FieldValues>(props: DefaultProps<F>) => {
 					{...field}
 					className={props.className}
 					onChange={(date, stringValue) => {
+						console.log('ON CHANGE', date, stringValue);
 						field.onChange(date, stringValue);
 						if (stringValue === undefined) {
 							props.onValueHasChanged?.();
@@ -34,7 +35,8 @@ export const DatePicker = <F extends FieldValues>(props: DefaultProps<F>) => {
 							{...params}
 							id={props.id}
 							onBlur={(event) => {
-								params?.onBlur?.(event);
+								console.log('ON BLUR');
+								params.onBlur?.(event);
 								props.onValueHasChanged?.();
 							}}
 							error={!!fieldState.error}
