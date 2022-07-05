@@ -1,7 +1,7 @@
 export {};
 
 describe('Select', () => {
-	it('test', () => {
+	it('can select option', () => {
 		throw new Error();
 	});
 });

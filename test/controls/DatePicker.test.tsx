@@ -1,7 +1,7 @@
 export {};
 
 describe('DatePicker', () => {
-	it('test', () => {
+	it('can select date', () => {
 		throw new Error();
 	});
 });

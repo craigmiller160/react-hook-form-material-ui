@@ -1,7 +1,7 @@
 export {};
 
 describe('Checkbox', () => {
-	it('test', () => {
+	it('can check box', () => {
 		throw new Error();
 	});
 });
