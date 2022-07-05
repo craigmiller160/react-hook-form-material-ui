@@ -1,26 +1,18 @@
 import React from 'react';
-import { Control, Controller, FieldPath, FieldValues } from 'react-hook-form';
+import { Controller, FieldValues } from 'react-hook-form';
 import MuiTextField from '@mui/material/TextField';
-import { Rules } from '../types/form';
+import { DefaultProps } from '../types/form';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Transform = (value: string) => any;
 
-interface Props<F extends FieldValues> {
-	readonly id?: string;
-	readonly name: FieldPath<F>;
-	readonly control: Control<F>;
-	readonly label: string;
-	readonly className?: string;
-	readonly rules?: Rules<F>;
+interface Props<F extends FieldValues> extends DefaultProps<F> {
 	readonly type?: 'text' | 'number' | 'password';
-	readonly disabled?: boolean;
 	readonly transform?: Transform;
 	readonly placeholder?: string;
 	readonly multiline?: boolean;
 	readonly rows?: number;
 	readonly variant?: 'standard' | 'filled' | 'outlined';
-	readonly testId?: string;
 }
 
 const TextField = <F extends FieldValues>(props: Props<F>) => {
