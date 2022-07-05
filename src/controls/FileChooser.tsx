@@ -1,5 +1,5 @@
 import React, { MutableRefObject } from 'react';
-import { Input } from '@mui/material';
+import { FormControlLabel, Input } from '@mui/material';
 import { Controller, FieldValues } from 'react-hook-form';
 import styled from '@emotion/styled';
 import { DefaultProps } from '../types/form';
@@ -18,7 +18,6 @@ const StyledDiv = styled.div`
 	}
 `;
 
-// TODO need a label here
 export const FileChooser = <F extends FieldValues>(props: Props<F>) => (
 	<Controller
 		name={props.name}
@@ -26,21 +25,26 @@ export const FileChooser = <F extends FieldValues>(props: Props<F>) => (
 		rules={props.rules}
 		render={({ field, fieldState }) => (
 			<StyledDiv className={props.className}>
-				<Input
-					id={props.id}
-					inputProps={{
-						'data-testid': props.testId,
-						ref: props.inputRef
-					}}
-					type="file"
-					disabled={props.disabled}
-					onBlur={field.onBlur}
-					onChange={(e) => {
-						field.onChange(
-							(e.target as HTMLInputElement).files?.[0]
-						);
-						props.onValueHasChanged?.();
-					}}
+				<FormControlLabel
+					control={
+						<Input
+							id={props.id}
+							inputProps={{
+								'data-testid': props.testId,
+								ref: props.inputRef
+							}}
+							type="file"
+							disabled={props.disabled}
+							onBlur={field.onBlur}
+							onChange={(e) => {
+								field.onChange(
+									(e.target as HTMLInputElement).files?.[0]
+								);
+								props.onValueHasChanged?.();
+							}}
+						/>
+					}
+					label={props.label}
 				/>
 				<span style={{ color: 'red' }}>
 					{fieldState.error?.message}
