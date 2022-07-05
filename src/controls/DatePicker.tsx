@@ -34,6 +34,7 @@ export const DatePicker = <F extends FieldValues>(props: DefaultProps<F>) => {
 							{...params}
 							id={props.id}
 							inputProps={{
+								...params.inputProps,
 								'data-testid': props.testId
 							}}
 							onBlur={(event) => {
