@@ -7,12 +7,14 @@ import {
 	MenuItem,
 	Select as MuiSelect
 } from '@mui/material';
+import { useId } from 'react';
 
 interface Props<F extends FieldValues> extends DefaultProps<F> {
 	readonly options: ReadonlyArray<SelectOption<string | number>>;
 }
 
 export const Select = <F extends FieldValues>(props: Props<F>) => {
+	const id = useId();
 	return (
 		<Controller
 			name={props.name}
@@ -20,9 +22,10 @@ export const Select = <F extends FieldValues>(props: Props<F>) => {
 			rules={props.rules}
 			render={({ field, fieldState }) => (
 				<FormControl>
-					<InputLabel>{props.label}</InputLabel>
+					<InputLabel id={id}>{props.label}</InputLabel>
 					<MuiSelect
 						{...field}
+						labelId={id}
 						className={props.className}
 						inputProps={{
 							'data-testid': props.testId
