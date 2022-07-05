@@ -1,15 +1,11 @@
 import React from 'react';
-import { Control, Controller, FieldPath, FieldValues } from 'react-hook-form';
+import { Controller, FieldValues } from 'react-hook-form';
 import MuiSwitch from '@mui/material/Switch';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import { DefaultProps } from '../types/form';
 
-interface Props<F extends FieldValues> {
-	readonly id?: string;
-	readonly name: FieldPath<F>;
-	readonly control: Control<F>;
-	readonly label: string;
+interface Props<F extends FieldValues> extends DefaultProps<F> {
 	readonly color?: 'primary' | 'secondary' | 'default';
-	readonly className?: string;
 }
 
 const Switch = <F extends FieldValues>(props: Props<F>) => {
@@ -21,6 +17,7 @@ const Switch = <F extends FieldValues>(props: Props<F>) => {
 		<Controller
 			control={control}
 			name={name}
+			rules={props.rules}
 			render={({ field: { onChange, onBlur, value } }) => (
 				<FormControlLabel
 					className={labelClassName}
@@ -28,10 +25,15 @@ const Switch = <F extends FieldValues>(props: Props<F>) => {
 					control={
 						<MuiSwitch
 							id={id}
+							data-testid={props.testId}
 							classes={{
 								input: `switch-${value}`
 							}}
-							onChange={(event) => onChange(event.target.checked)}
+							disabled={props.disabled}
+							onChange={(event) => {
+								onChange(event.target.checked);
+								props.onValueHasChanged?.();
+							}}
 							onBlur={onBlur}
 							checked={value}
 							color={color ?? 'primary'}
