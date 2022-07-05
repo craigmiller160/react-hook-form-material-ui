@@ -1,7 +1,7 @@
 import { DatePicker, ValueHasChanged } from '../../src';
 import { useForm } from 'react-hook-form';
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers';
@@ -16,23 +16,16 @@ interface FormComponentProps {
 }
 
 const FormComponent = (props: FormComponentProps) => {
-	const { control, handleSubmit, formState, getValues } = useForm<Form>({
+	const { control, handleSubmit } = useForm<Form>({
 		defaultValues: {
 			field: null
 		}
 	});
 
-	console.log('FORM', getValues(), formState.errors);
-
 	return (
 		<LocalizationProvider dateAdapter={AdapterDateFns}>
 			<p>Random Text</p>
-			<form
-				onSubmit={() => {
-					console.log('INNER SUBMIT');
-					handleSubmit(props.onSubmit)();
-				}}
-			>
+			<form onSubmit={handleSubmit(props.onSubmit)}>
 				<DatePicker
 					control={control}
 					name="field"
