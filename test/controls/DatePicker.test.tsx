@@ -78,8 +78,10 @@ describe('DatePicker', () => {
 
 		expect(valueHasChangedCalled).toEqual(true);
 		await userEvent.click(screen.getByText('Submit'));
-		expect(receivedValues).not.toBeUndefined();
-		expect(receivedValues?.field).toBeInstanceOf(Date); // TODO validate date value
+		expect(receivedValues?.field).toBeTruthy();
+		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+		const formattedValue = format(receivedValues!.field!, 'yyyy-MM-dd');
+		expect(formattedValue).toEqual(format(new Date(), 'yyyy-MM-dd'));
 	});
 
 	it('can type date', async () => {
@@ -102,6 +104,9 @@ describe('DatePicker', () => {
 		expect(screen.getByLabelText('My Date')).toHaveValue('01/01/2022');
 		await userEvent.click(screen.getByText('Submit'));
 		expect(receivedValues).not.toBeUndefined();
-		expect(receivedValues?.field).toBeInstanceOf(Date); // TODO validate date value
+		expect(receivedValues?.field).toBeTruthy();
+		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+		const formattedValue = format(receivedValues!.field!, 'yyyy-MM-dd');
+		expect(formattedValue).toEqual('2022-01-01');
 	});
 });
