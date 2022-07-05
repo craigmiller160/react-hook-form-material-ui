@@ -45,6 +45,7 @@ const Autocomplete = <F extends FieldValues, R>(props: Props<F, R>) => {
 						<TextField
 							{...params}
 							inputProps={{
+								...params.inputProps,
 								'data-testid': props.testId
 							}}
 							label={label}
