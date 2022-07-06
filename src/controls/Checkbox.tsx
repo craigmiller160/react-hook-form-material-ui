@@ -10,11 +10,11 @@ export const Checkbox = <F extends FieldValues>(props: DefaultProps<F>) => (
 		rules={props.rules}
 		render={({ field }) => (
 			<FormControlLabel
+				id={props.id}
 				label={props.label}
 				control={
 					<MuiCheckbox
 						{...field}
-						id={props.id}
 						data-testid={props.testId}
 						className={props.className}
 						disabled={props.disabled}
