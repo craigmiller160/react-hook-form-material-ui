@@ -4,9 +4,16 @@ import MuiCheckbox from '@mui/material/Checkbox';
 import { DefaultProps } from '../types/form';
 import { useId } from 'react';
 
-export const Checkbox = <F extends FieldValues>(props: DefaultProps<F>) => {
+type LabelPlacement = 'end' | 'start' | 'top' | 'bottom';
+
+interface Props<F extends FieldValues> extends DefaultProps<F> {
+	readonly labelPlacement?: LabelPlacement;
+}
+
+export const Checkbox = <F extends FieldValues>(props: Props<F>) => {
 	const generatedId = useId();
 	const idToUse = props.id ?? generatedId;
+	const labelPlacement = props.labelPlacement ?? 'end';
 	return (
 		<Controller
 			name={props.name}
@@ -17,6 +24,7 @@ export const Checkbox = <F extends FieldValues>(props: DefaultProps<F>) => {
 					htmlFor={idToUse}
 					label={props.label}
 					className={props.className}
+					labelPlacement={labelPlacement}
 					control={
 						<MuiCheckbox
 							{...field}
