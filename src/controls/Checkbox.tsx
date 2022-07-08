@@ -16,12 +16,12 @@ export const Checkbox = <F extends FieldValues>(props: DefaultProps<F>) => {
 				<FormControlLabel
 					htmlFor={idToUse}
 					label={props.label}
+					className={props.className}
 					control={
 						<MuiCheckbox
 							{...field}
 							id={idToUse}
 							data-testid={props.testId}
-							className={props.className}
 							disabled={props.disabled}
 							checked={field.value}
 							onChange={(event) => {
