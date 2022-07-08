@@ -23,6 +23,7 @@ export const Checkbox = <F extends FieldValues>(props: DefaultProps<F>) => {
 							data-testid={props.testId}
 							className={props.className}
 							disabled={props.disabled}
+							checked={field.value}
 							onChange={(event) => {
 								field.onChange(event);
 								props.onValueHasChanged?.();
