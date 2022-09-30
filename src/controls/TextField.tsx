@@ -4,11 +4,12 @@ import MuiTextField from '@mui/material/TextField';
 import { DefaultProps } from '../types/form';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-type Transform = (value: string) => any;
+export type Transform = (value: string) => any;
 
 interface Props<F extends FieldValues> extends DefaultProps<F> {
 	readonly type?: 'text' | 'number' | 'password';
 	readonly transform?: Transform;
+	readonly onBlurTransform?: Transform;
 	readonly placeholder?: string;
 	readonly multiline?: boolean;
 	readonly rows?: number;
@@ -26,6 +27,7 @@ const TextField = <F extends FieldValues>(props: Props<F>) => {
 		type,
 		disabled,
 		transform,
+		onBlurTransform,
 		placeholder,
 		multiline,
 		rows,
@@ -60,7 +62,12 @@ const TextField = <F extends FieldValues>(props: Props<F>) => {
 						}
 						props.onValueHasChanged?.();
 					}}
-					onBlur={onBlur}
+					onBlur={(event) => {
+						if (onBlurTransform) {
+							onChange(onBlurTransform(event.target.value));
+						}
+						onBlur();
+					}}
 					value={value}
 					error={!!fieldState.error}
 					helperText={fieldState.error?.message ?? ''}

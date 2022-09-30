@@ -3,7 +3,7 @@ import { FieldPath, useForm } from 'react-hook-form';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { RegisterOptions } from 'react-hook-form/dist/types/validator';
-import TextField from '../../src/controls/TextField';
+import TextField, { Transform } from '../../src/controls/TextField';
 
 interface Form {
 	field: string | number;
@@ -16,7 +16,8 @@ interface FormComponentProps {
 		'valueAsNumber' | 'valueAsDate' | 'setValueAs' | 'disabled'
 	>;
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	transform?: (value: string) => any;
+	transform?: Transform;
+	onBlurTransform?: Transform;
 	textArea?: boolean;
 }
 
@@ -35,6 +36,7 @@ const FormComponent = (props: FormComponentProps) => {
 
 	return (
 		<div>
+			<p>Hello World</p>
 			<form onSubmit={handleSubmit((values) => onSubmit(values))}>
 				<TextField
 					id="field"
@@ -47,6 +49,7 @@ const FormComponent = (props: FormComponentProps) => {
 					multiline={props.textArea}
 					rows={props.textArea ? 5 : 0}
 					onValueHasChanged={onValueHasChanged}
+					onBlurTransform={props.onBlurTransform}
 				/>
 				<button type="submit">Submit</button>
 			</form>
@@ -96,7 +99,25 @@ describe('TextField', () => {
 	});
 
 	it('transforms input onBlur', async () => {
-		throw new Error();
+		await waitFor(() =>
+			render(
+				<FormComponent
+					type="text"
+					onBlurTransform={(value) => `${value}-World`}
+				/>
+			)
+		);
+
+		const textField = screen.getByLabelText('The Field');
+		const submit = screen.getByText('Submit');
+
+		await userEvent.clear(textField);
+		await userEvent.type(textField, '123');
+
+		await waitFor(() => userEvent.click(submit));
+		expect(onSubmit).toHaveBeenNthCalledWith(1, {
+			field: '123-World'
+		});
 	});
 
 	it('transforms input', async () => {
