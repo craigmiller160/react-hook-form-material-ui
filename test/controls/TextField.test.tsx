@@ -95,6 +95,10 @@ describe('TextField', () => {
 		});
 	});
 
+	it('transforms input onBlur', async () => {
+		throw new Error();
+	});
+
 	it('transforms input', async () => {
 		await waitFor(() =>
 			render(
