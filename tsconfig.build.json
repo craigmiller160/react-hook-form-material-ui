@@ -19,15 +19,15 @@
     "jsx": "react",
     "declaration": true,
     "module": "es2015",
-    "outDir": "/home/craig/Development/Libraries/react-hook-form-material-ui/lib"
+    "outDir": "/Users/craigmiller/Development/Libraries/react-hook-form-material-ui/lib"
   },
   "include": [
-    "/home/craig/Development/Libraries/react-hook-form-material-ui/src/**/*"
+    "/Users/craigmiller/Development/Libraries/react-hook-form-material-ui/src/**/*"
   ],
   "exclude": [
-    "/home/craig/Development/Libraries/react-hook-form-material-ui/node_modules",
-    "/home/craig/Development/Libraries/react-hook-form-material-ui/lib",
-    "/home/craig/Development/Libraries/react-hook-form-material-ui/build",
-    "/home/craig/Development/Libraries/react-hook-form-material-ui/.yalc"
+    "/Users/craigmiller/Development/Libraries/react-hook-form-material-ui/node_modules",
+    "/Users/craigmiller/Development/Libraries/react-hook-form-material-ui/lib",
+    "/Users/craigmiller/Development/Libraries/react-hook-form-material-ui/build",
+    "/Users/craigmiller/Development/Libraries/react-hook-form-material-ui/.yalc"
   ]
 }

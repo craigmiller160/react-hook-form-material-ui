@@ -21,13 +21,13 @@
     "module": "es2015"
   },
   "include": [
-    "/home/craig/Development/Libraries/react-hook-form-material-ui/src/**/*",
-    "/home/craig/Development/Libraries/react-hook-form-material-ui/test/**/*"
+    "/Users/craigmiller/Development/Libraries/react-hook-form-material-ui/src/**/*",
+    "/Users/craigmiller/Development/Libraries/react-hook-form-material-ui/test/**/*"
   ],
   "exclude": [
-    "/home/craig/Development/Libraries/react-hook-form-material-ui/node_modules",
-    "/home/craig/Development/Libraries/react-hook-form-material-ui/lib",
-    "/home/craig/Development/Libraries/react-hook-form-material-ui/build",
-    "/home/craig/Development/Libraries/react-hook-form-material-ui/.yalc"
+    "/Users/craigmiller/Development/Libraries/react-hook-form-material-ui/node_modules",
+    "/Users/craigmiller/Development/Libraries/react-hook-form-material-ui/lib",
+    "/Users/craigmiller/Development/Libraries/react-hook-form-material-ui/build",
+    "/Users/craigmiller/Development/Libraries/react-hook-form-material-ui/.yalc"
   ]
 }
