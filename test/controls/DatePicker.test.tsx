@@ -16,6 +16,10 @@ interface FormComponentProps {
 	readonly onValueHasChanged: ValueHasChanged;
 }
 
+const range = (size: number): ReadonlyArray<number> => [
+	...new Array(size).keys()
+];
+
 const FormComponent = (props: FormComponentProps) => {
 	const { control, handleSubmit } = useForm<Form>({
 		defaultValues: {
@@ -48,7 +52,7 @@ describe('DatePicker', () => {
 	});
 
 	it('can select date', async () => {
-		const todayFormatted = format(new Date(), 'MMM d, yyyy');
+		const todayDay = format(new Date(), 'd');
 
 		const renderResult = render(
 			<FormComponent
@@ -69,12 +73,13 @@ describe('DatePicker', () => {
 
 		const popupDialog = screen.getByRole('dialog');
 
-		const selectedDateButton = popupDialog.querySelector(
-			`button[aria-label = "${todayFormatted}"]`
-		);
-		expect(selectedDateButton).not.toBeNull();
-		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-		await userEvent.click(selectedDateButton!);
+		const allButtons = popupDialog.querySelectorAll('button');
+		const matchingButtons = range(allButtons.length)
+			.map((index) => allButtons[index])
+			.filter((button) => button.textContent?.trim() === todayDay);
+		expect(matchingButtons).toHaveLength(1);
+
+		await userEvent.click(matchingButtons[0]);
 
 		expect(valueHasChangedCalled).toEqual(true);
 		await userEvent.click(screen.getByText('Submit'));
