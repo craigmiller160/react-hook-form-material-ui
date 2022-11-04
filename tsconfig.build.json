@@ -17,12 +17,12 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "react",
-    "declaration": false,
-    "module": "es2015"
+    "declaration": true,
+    "module": "es2015",
+    "outDir": "/Users/craigmiller/Development/Libraries/react-hook-form-material-ui/lib"
   },
   "include": [
-    "/Users/craigmiller/Development/Libraries/react-hook-form-material-ui/src/**/*",
-    "/Users/craigmiller/Development/Libraries/react-hook-form-material-ui/test/**/*"
+    "/Users/craigmiller/Development/Libraries/react-hook-form-material-ui/src/**/*"
   ],
   "exclude": [
     "/Users/craigmiller/Development/Libraries/react-hook-form-material-ui/node_modules",
