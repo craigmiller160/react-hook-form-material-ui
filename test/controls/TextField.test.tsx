@@ -1,125 +1,149 @@
 import React from 'react';
-import { useForm } from 'react-hook-form';
+import { FieldPath, useForm } from 'react-hook-form';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import TextField from '../../src/controls/TextField';
-import { FieldRules } from '../../src';
+import { RegisterOptions } from 'react-hook-form/dist/types/validator';
+import TextField, { Transform } from '../../src/controls/TextField';
 
 interface Form {
-    field: string | number;
+	field: string | number;
 }
 
 interface FormComponentProps {
-    type: 'text' | 'number';
-    rules?: FieldRules;
-    transform?: (value: string) => any;
-    textArea?: boolean;
+	type: 'text' | 'number';
+	rules?: Omit<
+		RegisterOptions<Form, FieldPath<Form>>,
+		'valueAsNumber' | 'valueAsDate' | 'setValueAs' | 'disabled'
+	>;
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	transform?: Transform;
+	onBlurTransform?: Transform;
+	textArea?: boolean;
 }
 
 const onSubmit = jest.fn();
+const onValueHasChanged = jest.fn();
 
 const FormComponent = (props: FormComponentProps) => {
-    const defaultValue = props.type ? '' : 0;
-    const { control, errors, handleSubmit } = useForm<Form>({
-        mode: 'onBlur',
-        reValidateMode: 'onChange',
-        defaultValues: {
-            field: defaultValue
-        }
-    });
+	const defaultValue = props.type ? '' : 0;
+	const { control, handleSubmit } = useForm<Form>({
+		mode: 'onBlur',
+		reValidateMode: 'onChange',
+		defaultValues: {
+			field: defaultValue
+		}
+	});
 
-    return (
-        <div>
-            <form onSubmit={ handleSubmit((values) => onSubmit(values)) }>
-                <TextField
-                    id="field"
-                    name="field"
-                    control={ control }
-                    label="The Field"
-                    error={ errors.field }
-                    type={ props.type }
-                    rules={ props.rules }
-                    transform={ props.transform }
-                    multiline={ props.textArea }
-                    rows={ props.textArea ? 5 : 0 }
-                />
-                <button type="submit">Submit</button>
-            </form>
-        </div>
-    );
+	return (
+		<div>
+			<p>Hello World</p>
+			<form onSubmit={handleSubmit((values) => onSubmit(values))}>
+				<TextField
+					id="field"
+					name="field"
+					control={control}
+					label="The Field"
+					type={props.type}
+					rules={props.rules}
+					transform={props.transform}
+					multiline={props.textArea}
+					rows={props.textArea ? 5 : 0}
+					onValueHasChanged={onValueHasChanged}
+					onBlurTransform={props.onBlurTransform}
+				/>
+				<button type="submit">Submit</button>
+			</form>
+		</div>
+	);
 };
 
 describe('TextField', () => {
-    it('accepts input for type text', async () => {
-        await waitFor(() => render(
-            <FormComponent
-                type="text"
-            />
-        ));
+	beforeEach(() => {
+		jest.clearAllMocks();
+	});
 
-        const textField = screen.getByLabelText('The Field');
-        userEvent.type(textField, 'Hello World');
+	it('accepts input for type text', async () => {
+		await waitFor(() => render(<FormComponent type="text" />));
 
-        await waitFor(() => userEvent.click(screen.getByText('Submit')));
-        expect(onSubmit).toHaveBeenCalledWith({
-            field: 'Hello World'
-        });
-    });
+		const textField = screen.getByLabelText('The Field');
+		await userEvent.type(textField, 'Hello World');
+		expect(onValueHasChanged).toHaveBeenCalled();
 
-    it('accepts input for type number', async () => {
-        await waitFor(() => render(
-            <FormComponent
-                type="number"
-            />
-        ));
+		await waitFor(() => userEvent.click(screen.getByText('Submit')));
+		expect(onSubmit).toHaveBeenCalledWith({
+			field: 'Hello World'
+		});
+	});
 
-        const textField = screen.getByLabelText('The Field');
-        const submit = screen.getByText('Submit');
+	it('accepts input for type number', async () => {
+		await waitFor(() => render(<FormComponent type="number" />));
 
-        userEvent.clear(textField);
-        userEvent.type(textField, '12345');
+		const textField = screen.getByLabelText('The Field');
+		const submit = screen.getByText('Submit');
 
-        await waitFor(() => userEvent.click(submit));
-        expect(onSubmit).toHaveBeenNthCalledWith(1, {
-            field: 12345
-        });
+		await userEvent.clear(textField);
+		await userEvent.type(textField, '12345');
 
-        userEvent.clear(textField);
-        userEvent.type(textField, 'ABC');
+		await waitFor(() => userEvent.click(submit));
+		expect(onSubmit).toHaveBeenNthCalledWith(1, {
+			field: 12345
+		});
 
-        await waitFor(() => userEvent.click(submit));
-        expect(onSubmit).toHaveBeenNthCalledWith(2, {
-            field: ''
-        });
-    });
+		await userEvent.clear(textField);
+		await userEvent.type(textField, 'ABC');
 
-    it('transforms input', async () => {
-        await waitFor(() => render(
-            <FormComponent
-                type="text"
-                transform={ (value) => value.toUpperCase() }
-            />
-        ));
+		await waitFor(() => userEvent.click(submit));
+		expect(onSubmit).toHaveBeenNthCalledWith(2, {
+			field: ''
+		});
+	});
 
-        const textField = screen.getByLabelText('The Field');
-        userEvent.type(textField, 'Hello World');
+	it('transforms input onBlur', async () => {
+		await waitFor(() =>
+			render(
+				<FormComponent
+					type="text"
+					onBlurTransform={(value) => `${value}-World`}
+				/>
+			)
+		);
 
-        await waitFor(() => userEvent.click(screen.getByText('Submit')));
-        expect(onSubmit).toHaveBeenCalledWith({
-            field: 'HELLO WORLD'
-        });
-    });
+		const textField = screen.getByLabelText('The Field');
+		const submit = screen.getByText('Submit');
 
-    it('shows text area', async () => {
-        await waitFor(() => render(
-            <FormComponent
-                type="text"
-                textArea
-            />
-        ));
+		await userEvent.clear(textField);
+		await userEvent.type(textField, '123');
 
-        const input = screen.getByLabelText('The Field');
-        expect(input.tagName).toEqual('TEXTAREA');
-        expect((input as HTMLTextAreaElement).rows).toEqual(5);
-    });
+		await waitFor(() => userEvent.click(submit));
+		expect(onSubmit).toHaveBeenNthCalledWith(1, {
+			field: '123-World'
+		});
+	});
+
+	it('transforms input', async () => {
+		await waitFor(() =>
+			render(
+				<FormComponent
+					type="text"
+					transform={(value) => value.toUpperCase()}
+				/>
+			)
+		);
+
+		const textField = screen.getByLabelText('The Field');
+		await userEvent.type(textField, 'Hello World');
+
+		await waitFor(() => userEvent.click(screen.getByText('Submit')));
+		expect(onSubmit).toHaveBeenCalledWith({
+			field: 'HELLO WORLD'
+		});
+	});
+
+	it('shows text area', async () => {
+		await waitFor(() => render(<FormComponent type="text" textArea />));
+
+		const input = screen.getByLabelText('The Field');
+		expect(input.tagName).toEqual('TEXTAREA');
+		expect((input as HTMLTextAreaElement).rows).toEqual(5);
+	});
 });

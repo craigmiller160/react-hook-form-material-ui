@@ -1,7 +1,6 @@
 {
-  "version": 3,
   "compilerOptions": {
-    "target": "es5",
+    "target": "es2022",
     "lib": [
       "dom",
       "dom.iterable",
@@ -16,18 +15,18 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "react",
-    "declaration": false,
-    "module": "es2015"
+    "jsx": "react-jsx",
+    "declaration": true,
+    "module": "es2015",
+    "outDir": "./lib"
   },
   "include": [
-    "/Users/craigmiller/Development/Libraries/react-hook-form-material-ui/src/**/*",
-    "/Users/craigmiller/Development/Libraries/react-hook-form-material-ui/test/**/*"
+    "./src/**/*"
   ],
   "exclude": [
-    "/Users/craigmiller/Development/Libraries/react-hook-form-material-ui/node_modules",
-    "/Users/craigmiller/Development/Libraries/react-hook-form-material-ui/lib",
-    "/Users/craigmiller/Development/Libraries/react-hook-form-material-ui/build",
-    "/Users/craigmiller/Development/Libraries/react-hook-form-material-ui/.yalc"
+    "./node_modules",
+    "./lib",
+    "./build",
+    "./.yalc"
   ]
 }

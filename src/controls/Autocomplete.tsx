@@ -1,60 +1,63 @@
-import React from 'react';
-import { Control, Controller, FieldError } from 'react-hook-form';
-import MuiAutocomplete from '@material-ui/lab/Autocomplete';
-import TextField from '@material-ui/core/TextField';
-import { FieldRules, SelectOption } from '../types/form';
+/* eslint-disable @typescript-eslint/no-unnecessary-type-constraint */
+import { Controller, FieldValues } from 'react-hook-form';
+import MuiAutocomplete from '@mui/material/Autocomplete';
+import TextField from '@mui/material/TextField';
+import { DefaultProps, SelectOption } from '../types/form';
 
-interface Props<R> {
-    id?: string;
-    name: string;
-    control: Control;
-    error?: FieldError;
-    rules?: FieldRules;
-    label: string;
-    options: Array<SelectOption<R>>;
-    className?: string;
+interface Props<F extends FieldValues, R> extends DefaultProps<F> {
+	readonly options: ReadonlyArray<SelectOption<R>>;
 }
 
-const Autocomplete = <R extends any>(props: Props<R>) => {
-    const {
-        id,
-        name,
-        control,
-        error,
-        rules,
-        label,
-        options,
-        className
-    } = props;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const getOptionLabel = <R extends any>(option: string | SelectOption<R>) => {
+	if (typeof option === 'string') {
+		return option;
+	}
+	return (option as SelectOption<R>).label;
+};
 
-    return (
-        <Controller
-            control={ control }
-            name={ name }
-            rules={ rules }
-            render={ ({ onChange, onBlur, value }) => (
-                <MuiAutocomplete
-                    id={ id }
-                    className={ className }
-                    options={ options }
-                    getOptionLabel={ (option) => option?.label ?? '' }
-                    getOptionSelected={ (option, selected) => option.value === selected.value }
-                    value={ value }
-                    onChange={ (event, newValue) => onChange(newValue) }
-                    onBlur={ onBlur }
-                    renderInput={ (params) => (
-                        <TextField
-                            { ...params }
-                            label={ label }
-                            variant="outlined"
-                            error={ !!error }
-                            helperText={ error?.message ?? '' }
-                        />
-                    ) }
-                />
-            ) }
-        />
-    );
+const Autocomplete = <F extends FieldValues, R>(props: Props<F, R>) => {
+	const { id, name, control, rules, label, options, className, disabled } =
+		props;
+
+	return (
+		<Controller
+			control={control}
+			name={name}
+			rules={rules}
+			render={({ field, fieldState }) => (
+				<MuiAutocomplete
+					id={id}
+					className={className}
+					options={options}
+					isOptionEqualToValue={(option, selected) =>
+						option.value === selected.value
+					}
+					getOptionLabel={getOptionLabel}
+					value={field.value}
+					onChange={(event, newValue) => {
+						field.onChange(newValue);
+						props.onValueHasChanged?.();
+					}}
+					onBlur={field.onBlur}
+					disabled={disabled}
+					renderInput={(params) => (
+						<TextField
+							{...params}
+							inputProps={{
+								...params.inputProps,
+								'data-testid': props.testId
+							}}
+							label={label}
+							variant="outlined"
+							error={!!fieldState.error}
+							helperText={fieldState.error?.message ?? ''}
+						/>
+					)}
+				/>
+			)}
+		/>
+	);
 };
 
 export default Autocomplete;

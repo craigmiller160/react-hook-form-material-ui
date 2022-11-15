@@ -1,17 +1,26 @@
-import { Validate, ValidationRule, ValidationValueMessage } from 'react-hook-form/dist/types/validator';
-import { ReactText } from 'react';
-
-export interface FieldRules {
-    required?: string | boolean | ValidationValueMessage<boolean>;
-    min?: ValidationRule<ReactText>;
-    max?: ValidationRule<ReactText>;
-    maxLength?: ValidationRule<ReactText>;
-    minLength?: ValidationRule<ReactText>;
-    pattern?: ValidationRule<RegExp>;
-    validate?: Validate | Record<string, Validate>;
-}
+import { RegisterOptions } from 'react-hook-form/dist/types/validator';
+import { Control, FieldPath, FieldValues } from 'react-hook-form';
 
 export interface SelectOption<R> {
-    label: string;
-    value: R;
+	label: string;
+	value: R;
+}
+
+export type Rules<F extends FieldValues> = Omit<
+	RegisterOptions<F, FieldPath<F>>,
+	'valueAsNumber' | 'valueAsDate' | 'setValueAs' | 'disabled'
+>;
+
+export type ValueHasChanged = () => void;
+
+export interface DefaultProps<F extends FieldValues> {
+	readonly id?: string;
+	readonly testId?: string;
+	readonly className?: string;
+	readonly disabled?: boolean;
+	readonly control: Control<F>;
+	readonly name: FieldPath<F>;
+	readonly label: string;
+	readonly rules?: Rules<F>;
+	readonly onValueHasChanged?: ValueHasChanged;
 }
