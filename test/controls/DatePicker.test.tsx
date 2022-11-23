@@ -51,6 +51,14 @@ describe('DatePicker', () => {
 		receivedValues = undefined;
 	});
 
+	it('prevents invalid date', async () => {
+		throw new Error();
+	});
+
+	it('allows blank date when date is not required value', async () => {
+		throw new Error();
+	});
+
 	it('can select date', async () => {
 		const todayDay = format(new Date(), 'd');
 
