@@ -4,8 +4,8 @@ import { DatePicker as MuiDatePicker } from '@mui/x-date-pickers';
 import MuiTextField from '@mui/material/TextField';
 import isValid from 'date-fns/isValid/index';
 
-const validate = (value: Date): string | undefined =>
-	isValid(value) ? undefined : 'Must be valid date';
+const validate = (value?: Date): string | undefined =>
+	!value || isValid(value) ? undefined : 'Must be valid date';
 
 export const DatePicker = <F extends FieldValues>(props: DefaultProps<F>) => {
 	const rules: Rules<F> = {
