@@ -1,7 +1,7 @@
 import { DatePicker, ValueHasChanged } from '../../src';
 import { useForm } from 'react-hook-form';
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers';
@@ -52,11 +52,44 @@ describe('DatePicker', () => {
 	});
 
 	it('prevents invalid date', async () => {
-		throw new Error();
+		render(
+			<FormComponent
+				onSubmit={(values) => {
+					receivedValues = values;
+				}}
+				onValueHasChanged={() => {
+					valueHasChangedCalled = true;
+				}}
+			/>
+		);
+		await userEvent.type(screen.getByLabelText('My Date'), '01');
+		await userEvent.click(screen.getByText('Submit'));
+		await waitFor(() =>
+			expect(screen.queryByText('Must be valid date')).toBeVisible()
+		);
+		expect(receivedValues).toBeUndefined();
 	});
 
 	it('allows blank date when date is not required value', async () => {
-		throw new Error();
+		render(
+			<FormComponent
+				onSubmit={(values) => {
+					receivedValues = values;
+				}}
+				onValueHasChanged={() => {
+					valueHasChangedCalled = true;
+				}}
+			/>
+		);
+		await userEvent.click(screen.getByText('Submit'));
+		expect(receivedValues).toEqual({
+			field: null
+		});
+		await waitFor(() =>
+			expect(
+				screen.queryByText('Must be valid date')
+			).not.toBeInTheDocument()
+		);
 	});
 
 	it('can select date', async () => {
