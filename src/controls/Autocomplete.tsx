@@ -6,6 +6,7 @@ import { DefaultProps, SelectOption } from '../types/form';
 
 interface Props<F extends FieldValues, R> extends DefaultProps<F> {
 	readonly options: ReadonlyArray<SelectOption<R>>;
+	readonly multiple?: boolean;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -17,8 +18,17 @@ const getOptionLabel = <R extends any>(option: string | SelectOption<R>) => {
 };
 
 const Autocomplete = <F extends FieldValues, R>(props: Props<F, R>) => {
-	const { id, name, control, rules, label, options, className, disabled } =
-		props;
+	const {
+		id,
+		name,
+		control,
+		rules,
+		label,
+		options,
+		className,
+		disabled,
+		multiple
+	} = props;
 
 	return (
 		<Controller
@@ -30,6 +40,7 @@ const Autocomplete = <F extends FieldValues, R>(props: Props<F, R>) => {
 					id={id}
 					className={className}
 					options={options}
+					multiple={multiple}
 					isOptionEqualToValue={(option, selected) =>
 						option.value === selected.value
 					}
