@@ -75,6 +75,10 @@ describe('TextField', () => {
 		});
 	});
 
+	it('debounces onChange for type text', async () => {
+		throw new Error();
+	});
+
 	it('accepts input for type number', async () => {
 		await waitFor(() => render(<FormComponent type="number" />));
 
