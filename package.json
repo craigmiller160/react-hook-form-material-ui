@@ -54,7 +54,7 @@
     "lint-staged": "^13.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-hook-form": "^7.33.0",
+    "react-hook-form": "^7.44.3",
     "typescript": "^5.1.3"
   }
 }
