@@ -23,10 +23,9 @@ export const Select = <F extends FieldValues>(props: Props<F>) => {
 			rules={props.rules}
 			render={({ field, fieldState }) => (
 				<FormControl>
-					<InputLabel id={id}>{props.label}</InputLabel>
+					<InputLabel id={`${id}-label`}>{props.label}</InputLabel>
 					<MuiSelect
 						{...field}
-						labelId={id}
 						className={props.className}
 						inputProps={{
 							'data-testid': props.testId
