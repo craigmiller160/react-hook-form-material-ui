@@ -2,6 +2,7 @@ import { SelectOption, ValueHasChanged, Select } from '../../src';
 import { useForm } from 'react-hook-form';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { validateIds } from './validateIds';
 
 const options: ReadonlyArray<SelectOption<number>> = [
 	{ value: 1, label: 'One' },
@@ -26,6 +27,7 @@ const FormComponent = (props: FormComponentProps) => {
 	return (
 		<form onSubmit={handleSubmit(props.onSubmit)}>
 			<Select
+				id="field"
 				control={control}
 				name="field"
 				label="My Select"
@@ -64,5 +66,12 @@ describe('Select', () => {
 		expect(receivedValues).toEqual({
 			field: 1
 		});
+	});
+
+	it('renders with id', () => {
+		const { container } = render(
+			<FormComponent onSubmit={jest.fn} onValueHasChanged={jest.fn} />
+		);
+		validateIds(container, 'field');
 	});
 });

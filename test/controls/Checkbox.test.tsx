@@ -2,6 +2,7 @@ import { useForm } from 'react-hook-form';
 import { Checkbox, ValueHasChanged } from '../../src';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { validateIds } from './validateIds';
 
 interface Form {
 	readonly field: boolean;
@@ -56,5 +57,10 @@ describe('Checkbox', () => {
 		expect(receivedValues).toEqual({
 			field: true
 		});
+	});
+
+	it('renders with id', () => {
+		const { container } = render(<FormComponent />);
+		validateIds(container, 'field');
 	});
 });

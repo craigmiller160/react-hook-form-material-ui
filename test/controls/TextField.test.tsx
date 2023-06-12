@@ -1,9 +1,9 @@
-import React from 'react';
 import { FieldPath, useForm } from 'react-hook-form';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { RegisterOptions } from 'react-hook-form/dist/types/validator';
 import TextField, { Transform } from '../../src/controls/TextField';
+import { validateIds } from './validateIds';
 
 interface Form {
 	field: string | number;
@@ -145,5 +145,22 @@ describe('TextField', () => {
 		const input = screen.getByLabelText('The Field');
 		expect(input.tagName).toEqual('TEXTAREA');
 		expect((input as HTMLTextAreaElement).rows).toEqual(5);
+	});
+
+	it('renders with id', () => {
+		const { container: textContainer } = render(
+			<FormComponent type="text" />
+		);
+		validateIds(textContainer, 'field');
+
+		const { container: textAreaContainer } = render(
+			<FormComponent type="text" textArea />
+		);
+		validateIds(textAreaContainer, 'field');
+
+		const { container: numberContainer } = render(
+			<FormComponent type="number" />
+		);
+		validateIds(numberContainer, 'field');
 	});
 });

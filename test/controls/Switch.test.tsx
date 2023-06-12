@@ -1,8 +1,8 @@
-import React from 'react';
 import { useForm } from 'react-hook-form';
 import { render, waitFor, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Switch from '../../src/controls/Switch';
+import { validateIds } from './validateIds';
 
 interface Form {
 	field: boolean;
@@ -50,5 +50,10 @@ describe('Switch', () => {
 		expect(onSubmit).toHaveBeenCalledWith({
 			field: true
 		});
+	});
+
+	it('renders with id', () => {
+		const { container } = render(<FormComponent />);
+		validateIds(container, 'field');
 	});
 });
