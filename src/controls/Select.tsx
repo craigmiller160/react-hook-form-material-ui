@@ -28,10 +28,11 @@ export const Select = <F extends FieldValues>(props: Props<F>) => {
 					<MuiSelect
 						{...field}
 						className={props.className}
+						id={`${inputId}-wrapper`}
 						inputProps={{
-							'data-testid': props.testId
+							'data-testid': props.testId,
+							id: inputId
 						}}
-						id={inputId}
 						onChange={(event) => {
 							field.onChange(event);
 							props.onValueHasChanged?.();
