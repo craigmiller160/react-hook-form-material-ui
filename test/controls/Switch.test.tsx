@@ -24,6 +24,7 @@ const FormComponent = () => {
 		<div>
 			<form onSubmit={handleSubmit((values) => onSubmit(values))}>
 				<Switch
+					id="field"
 					name="field"
 					control={control}
 					label="The Field"
