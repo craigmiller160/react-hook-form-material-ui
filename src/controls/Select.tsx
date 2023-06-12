@@ -14,7 +14,8 @@ interface Props<F extends FieldValues> extends DefaultProps<F> {
 }
 
 export const Select = <F extends FieldValues>(props: Props<F>) => {
-	const id = useId();
+	const defaultId = useId();
+	const id = props.id ?? defaultId;
 	return (
 		<Controller
 			name={props.name}
