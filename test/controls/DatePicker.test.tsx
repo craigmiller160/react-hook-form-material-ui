@@ -32,6 +32,7 @@ const FormComponent = (props: FormComponentProps) => {
 			<p>Random Text</p>
 			<form onSubmit={handleSubmit(props.onSubmit)}>
 				<DatePicker
+					id="field"
 					control={control}
 					name="field"
 					label="My Date"
