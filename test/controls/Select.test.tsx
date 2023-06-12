@@ -58,7 +58,7 @@ describe('Select', () => {
 				}}
 			/>
 		);
-		await userEvent.click(screen.getByLabelText('My Select'));
+		await userEvent.click(screen.getAllByRole('button')[0]);
 		await userEvent.click(screen.getByText('One'));
 		expect(valueHasChangedCalled).toEqual(true);
 
