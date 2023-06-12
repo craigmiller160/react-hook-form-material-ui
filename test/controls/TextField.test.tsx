@@ -156,7 +156,7 @@ describe('TextField', () => {
 		const { container: textAreaContainer } = render(
 			<FormComponent type="text" textArea />
 		);
-		validateIds(textAreaContainer, 'field');
+		validateIds(textAreaContainer, 'field', 'textarea');
 
 		const { container: numberContainer } = render(
 			<FormComponent type="number" />
