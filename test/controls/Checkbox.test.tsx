@@ -60,7 +60,9 @@ describe('Checkbox', () => {
 	});
 
 	it('renders with id', () => {
-		const { container } = render(<FormComponent />);
+		const { container } = render(
+			<FormComponent onSubmit={jest.fn()} onValueHasChanged={jest.fn()} />
+		);
 		validateIds(container, 'field');
 	});
 });
