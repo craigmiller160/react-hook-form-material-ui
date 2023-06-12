@@ -3,6 +3,7 @@ import { DefaultProps, Rules } from '../types/form';
 import { DatePicker as MuiDatePicker } from '@mui/x-date-pickers';
 import MuiTextField from '@mui/material/TextField';
 import isValid from 'date-fns/isValid/index';
+import { useControlId } from '../utils/useControlId';
 
 const validate = (value?: Date): string | undefined =>
 	!value || isValid(value) ? undefined : 'Must be valid date';
@@ -12,6 +13,7 @@ export const DatePicker = <F extends FieldValues>(props: DefaultProps<F>) => {
 		...(props.rules ?? {}),
 		validate
 	};
+	const { inputId } = useControlId(props.id);
 	return (
 		<Controller
 			name={props.name}
@@ -32,7 +34,7 @@ export const DatePicker = <F extends FieldValues>(props: DefaultProps<F>) => {
 					renderInput={(params) => (
 						<MuiTextField
 							{...params}
-							id={props.id}
+							id={inputId}
 							inputProps={{
 								...params.inputProps,
 								'data-testid': props.testId

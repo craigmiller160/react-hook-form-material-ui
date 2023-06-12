@@ -2,7 +2,7 @@ import { Controller, FieldValues } from 'react-hook-form';
 import { FormControlLabel } from '@mui/material';
 import MuiCheckbox from '@mui/material/Checkbox';
 import { DefaultProps } from '../types/form';
-import { useId } from 'react';
+import { useControlId } from '../utils/useControlId';
 
 type LabelPlacement = 'end' | 'start' | 'top' | 'bottom';
 
@@ -11,8 +11,7 @@ interface Props<F extends FieldValues> extends DefaultProps<F> {
 }
 
 export const Checkbox = <F extends FieldValues>(props: Props<F>) => {
-	const generatedId = useId();
-	const idToUse = props.id ?? generatedId;
+	const { inputId, labelId } = useControlId(props.id);
 	const labelPlacement = props.labelPlacement ?? 'end';
 	return (
 		<Controller
@@ -21,15 +20,15 @@ export const Checkbox = <F extends FieldValues>(props: Props<F>) => {
 			rules={props.rules}
 			render={({ field }) => (
 				<FormControlLabel
-					id={`${idToUse}-label`}
-					htmlFor={idToUse}
+					id={labelId}
+					htmlFor={inputId}
 					label={props.label}
 					className={props.className}
 					labelPlacement={labelPlacement}
 					control={
 						<MuiCheckbox
 							{...field}
-							id={idToUse}
+							id={inputId}
 							data-testid={props.testId}
 							disabled={props.disabled}
 							checked={field.value}
