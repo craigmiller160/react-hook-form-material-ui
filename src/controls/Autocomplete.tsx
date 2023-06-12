@@ -3,6 +3,7 @@ import { Controller, FieldValues } from 'react-hook-form';
 import MuiAutocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import { DefaultProps, SelectOption } from '../types/form';
+import { useControlId } from '../utils/useControlId';
 
 interface Props<F extends FieldValues, R> extends DefaultProps<F> {
 	readonly options: ReadonlyArray<SelectOption<R>>;
@@ -29,6 +30,7 @@ const Autocomplete = <F extends FieldValues, R>(props: Props<F, R>) => {
 		disabled,
 		multiple
 	} = props;
+	const { inputId } = useControlId(id);
 
 	return (
 		<Controller
@@ -37,7 +39,7 @@ const Autocomplete = <F extends FieldValues, R>(props: Props<F, R>) => {
 			rules={rules}
 			render={({ field, fieldState }) => (
 				<MuiAutocomplete
-					id={id}
+					id={inputId}
 					className={className}
 					options={options}
 					multiple={multiple}

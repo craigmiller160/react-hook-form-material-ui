@@ -3,6 +3,7 @@ import { Controller, FieldValues } from 'react-hook-form';
 import MuiSwitch from '@mui/material/Switch';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { DefaultProps } from '../types/form';
+import { useControlId } from '../utils/useControlId';
 
 interface Props<F extends FieldValues> extends DefaultProps<F> {
 	readonly color?: 'primary' | 'secondary' | 'default';
@@ -10,7 +11,7 @@ interface Props<F extends FieldValues> extends DefaultProps<F> {
 
 const Switch = <F extends FieldValues>(props: Props<F>) => {
 	const { id, className, name, control, color, label } = props;
-
+	const { inputId, labelId } = useControlId(id);
 	const labelClassName = `${className ?? ''} switch-label`;
 
 	return (
@@ -20,11 +21,12 @@ const Switch = <F extends FieldValues>(props: Props<F>) => {
 			rules={props.rules}
 			render={({ field: { onChange, onBlur, value } }) => (
 				<FormControlLabel
+					id={labelId}
 					className={labelClassName}
 					label={label}
 					control={
 						<MuiSwitch
-							id={id}
+							id={inputId}
 							data-testid={props.testId}
 							classes={{
 								input: `switch-${value}`

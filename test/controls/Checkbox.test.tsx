@@ -2,6 +2,7 @@ import { useForm } from 'react-hook-form';
 import { Checkbox, ValueHasChanged } from '../../src';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { validateIds } from './validateIds';
 
 interface Form {
 	readonly field: boolean;
@@ -21,6 +22,7 @@ const FormComponent = (props: FormComponentProps) => {
 	return (
 		<form onSubmit={handleSubmit(props.onSubmit)}>
 			<Checkbox
+				id="field"
 				control={control}
 				name="field"
 				label="My Checkbox"
@@ -56,5 +58,12 @@ describe('Checkbox', () => {
 		expect(receivedValues).toEqual({
 			field: true
 		});
+	});
+
+	it('renders with id', () => {
+		const { container } = render(
+			<FormComponent onSubmit={jest.fn()} onValueHasChanged={jest.fn()} />
+		);
+		validateIds(container, 'field');
 	});
 });

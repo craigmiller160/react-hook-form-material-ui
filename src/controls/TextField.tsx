@@ -2,6 +2,7 @@ import React from 'react';
 import { Controller, FieldValues } from 'react-hook-form';
 import MuiTextField from '@mui/material/TextField';
 import { DefaultProps } from '../types/form';
+import { useControlId } from '../utils/useControlId';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type Transform = (value: string) => any;
@@ -39,6 +40,8 @@ const TextField = <F extends FieldValues>(props: Props<F>) => {
 		actualTransform = (value) => (value ? parseInt(value, 10) : '');
 	}
 
+	const { inputId } = useControlId(id);
+
 	return (
 		<Controller
 			control={control}
@@ -46,7 +49,7 @@ const TextField = <F extends FieldValues>(props: Props<F>) => {
 			rules={rules}
 			render={({ field: { onChange, onBlur, value }, fieldState }) => (
 				<MuiTextField
-					id={id}
+					id={inputId}
 					type={type}
 					className={className}
 					inputProps={{

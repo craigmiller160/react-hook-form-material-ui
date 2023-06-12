@@ -1,11 +1,11 @@
 import { DatePicker, ValueHasChanged } from '../../src';
 import { useForm } from 'react-hook-form';
-import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import format from 'date-fns/format/index';
+import { validateIds } from './validateIds';
 
 interface Form {
 	readonly field: Date | null;
@@ -32,6 +32,7 @@ const FormComponent = (props: FormComponentProps) => {
 			<p>Random Text</p>
 			<form onSubmit={handleSubmit(props.onSubmit)}>
 				<DatePicker
+					id="field"
 					control={control}
 					name="field"
 					label="My Date"
@@ -154,5 +155,12 @@ describe('DatePicker', () => {
 		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 		const formattedValue = format(receivedValues!.field!, 'yyyy-MM-dd');
 		expect(formattedValue).toEqual('2022-01-01');
+	});
+
+	it('renders with id', () => {
+		const { container } = render(
+			<FormComponent onSubmit={jest.fn()} onValueHasChanged={jest.fn()} />
+		);
+		validateIds(container, 'field');
 	});
 });
