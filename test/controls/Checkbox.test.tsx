@@ -22,6 +22,7 @@ const FormComponent = (props: FormComponentProps) => {
 	return (
 		<form onSubmit={handleSubmit(props.onSubmit)}>
 			<Checkbox
+				id="field"
 				control={control}
 				name="field"
 				label="My Checkbox"

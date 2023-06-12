@@ -21,6 +21,7 @@ export const Checkbox = <F extends FieldValues>(props: Props<F>) => {
 			rules={props.rules}
 			render={({ field }) => (
 				<FormControlLabel
+					id={`${idToUse}-label`}
 					htmlFor={idToUse}
 					label={props.label}
 					className={props.className}
