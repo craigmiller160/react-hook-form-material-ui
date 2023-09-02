@@ -1,8 +1,13 @@
 {
   "name": "@craigmiller160/react-hook-form-material-ui",
   "version": "1.5.0-beta",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/types/index.d.ts",
+      "import": "./lib/esm/index.js",
+      "require": "./lib/cjs/index.js"
+    }
+  },
   "publishConfig": {
     "registry": "https://nexus-craigmiller160.ddns.net/repository/npm-private/"
   },
@@ -16,8 +21,8 @@
     "*.{ts,tsx}": "craig-lint"
   },
   "scripts": {
-    "build": "npm run lint && npm run test && npm run forceBuild",
-    "forceBuild": "rm -rf ./lib && tsc",
+    "build": "npm run typeCheck && npm run lint && npm run test && npm run forceBuild",
+    "forceBuild": "rm -rf lib && craig-multi-module && tsc --declaration --emitDeclarationOnly --outDir ./lib/types",
     "lint": "craig-lint",
     "test": "craig-test",
     "typeCheck": "tsc --noEmit --project ./test/tsconfig.json",
