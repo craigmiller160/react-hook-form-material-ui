@@ -1,7 +1,6 @@
-import { FieldPath, useForm } from 'react-hook-form';
+import { FieldPath, useForm, RegisterOptions } from 'react-hook-form';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { RegisterOptions } from 'react-hook-form/dist/types/validator';
 import TextField, { Transform } from '../../src/controls/TextField';
 import { validateIds } from './validateIds';
 
