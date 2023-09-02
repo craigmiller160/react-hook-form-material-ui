@@ -1,5 +1,9 @@
-import { RegisterOptions } from 'react-hook-form/dist/types/validator';
-import { Control, FieldPath, FieldValues } from 'react-hook-form';
+import {
+	Control,
+	FieldPath,
+	FieldValues,
+	RegisterOptions
+} from 'react-hook-form';
 
 export interface SelectOption<R> {
 	label: string;

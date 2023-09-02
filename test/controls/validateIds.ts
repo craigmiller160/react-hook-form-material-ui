@@ -7,6 +7,6 @@ export const validateIds = (
 ) => {
 	const label = container.querySelector('label');
 	const input = container.querySelector(inputTag);
-	expect(label.id).toEqual(`${baseId}-label`);
-	expect(input.id).toEqual(baseId);
+	expect(label?.id).toEqual(`${baseId}-label`);
+	expect(input?.id).toEqual(baseId);
 };
