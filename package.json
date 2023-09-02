@@ -16,7 +16,7 @@
     "*.{ts,tsx}": "craig-lint"
   },
   "scripts": {
-    "build": "yarn lint && yarn test && yarn forceBuild",
+    "build": "npm run lint && npm run test && npm run forceBuild",
     "forceBuild": "rm -rf ./lib && tsc",
     "lint": "craig-lint",
     "test": "craig-test",
