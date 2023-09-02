@@ -20,6 +20,7 @@
     "forceBuild": "rm -rf ./lib && tsc",
     "lint": "craig-lint",
     "test": "craig-test",
+    "typeCheck": "tsc --noEmit --project ./test/tsconfig.json",
     "prepare": "husky install"
   },
   "peerDependencies": {
