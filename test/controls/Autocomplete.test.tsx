@@ -1,3 +1,4 @@
+import { beforeEach, describe, it, vi, expect} from 'vitest';
 import { useForm } from 'react-hook-form';
 import { render, waitFor, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -9,8 +10,8 @@ interface Form {
 	field: SelectOption<number> | null;
 }
 
-const onSubmit = jest.fn();
-const onValueHasChanged = jest.fn();
+const onSubmit = vi.fn();
+const onValueHasChanged = vi.fn();
 
 const FormComponent = () => {
 	const { control, handleSubmit } = useForm<Form>({
@@ -59,7 +60,7 @@ const FormComponent = () => {
 
 describe('Autocomplete', () => {
 	beforeEach(() => {
-		jest.clearAllMocks();
+		vi.clearAllMocks();
 	});
 	it('can select option', async () => {
 		await waitFor(() => render(<FormComponent />));
