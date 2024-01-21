@@ -42,7 +42,8 @@ const hasInputIds = (
 	}
 
 	return {
-		pass: true
+		pass: true,
+		message: () => ''
 	};
 };
 
