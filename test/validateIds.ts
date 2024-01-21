@@ -2,7 +2,7 @@ import { expect } from 'vitest';
 
 export type InputTag = 'input' | 'textarea';
 
-const validateInputIds = (
+const hasInputIds = (
 	container: HTMLElement,
 	baseId: string,
 	inputTag: InputTag = 'input'
@@ -47,5 +47,5 @@ const validateInputIds = (
 };
 
 expect.extend({
-	validateInputIds
+	hasInputIds
 });

@@ -150,16 +150,16 @@ describe('TextField', () => {
 		const { container: textContainer } = render(
 			<FormComponent type="text" />
 		);
-		expect(textContainer).validateInputIds('field');
+		expect(textContainer).hasInputIds('field');
 
 		const { container: textAreaContainer } = render(
 			<FormComponent type="text" textArea />
 		);
-		expect(textAreaContainer).validateInputIds('field', 'textarea');
+		expect(textAreaContainer).hasInputIds('field', 'textarea');
 
 		const { container: numberContainer } = render(
 			<FormComponent type="number" />
 		);
-		expect(numberContainer).validateInputIds('field');
+		expect(numberContainer).hasInputIds('field');
 	});
 });

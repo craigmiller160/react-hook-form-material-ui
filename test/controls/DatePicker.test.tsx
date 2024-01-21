@@ -161,6 +161,6 @@ describe('DatePicker', () => {
 		const { container } = render(
 			<FormComponent onSubmit={vi.fn()} onValueHasChanged={vi.fn()} />
 		);
-		expect(container).validateInputIds('field');
+		expect(container).hasInputIds('field');
 	});
 });

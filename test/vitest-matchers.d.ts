@@ -4,7 +4,7 @@ import type { Assertion, AsymmetricMatchersContaining } from 'vitest';
 import { InputTag } from './validateIds';
 
 interface CustomMatchers {
-	validateInputIds: (baseId: string, inputTag: InputTag) => void;
+	hasInputIds: (baseId: string, inputTag: InputTag) => void;
 }
 
 declare module 'vitest' {

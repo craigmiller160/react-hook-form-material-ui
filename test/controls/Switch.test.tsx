@@ -55,6 +55,6 @@ describe('Switch', () => {
 
 	it('renders with id', () => {
 		const { container } = render(<FormComponent />);
-		expect(container).validateInputIds('field');
+		expect(container).hasInputIds('field');
 	});
 });
