@@ -1,3 +1,4 @@
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { FieldPath, useForm, RegisterOptions } from 'react-hook-form';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -14,14 +15,14 @@ interface FormComponentProps {
 		RegisterOptions<Form, FieldPath<Form>>,
 		'valueAsNumber' | 'valueAsDate' | 'setValueAs' | 'disabled'
 	>;
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+
 	transform?: Transform;
 	onBlurTransform?: Transform;
 	textArea?: boolean;
 }
 
-const onSubmit = jest.fn();
-const onValueHasChanged = jest.fn();
+const onSubmit = vi.fn();
+const onValueHasChanged = vi.fn();
 
 const FormComponent = (props: FormComponentProps) => {
 	const defaultValue = props.type ? '' : 0;
@@ -58,7 +59,7 @@ const FormComponent = (props: FormComponentProps) => {
 
 describe('TextField', () => {
 	beforeEach(() => {
-		jest.clearAllMocks();
+		vi.clearAllMocks();
 	});
 
 	it('accepts input for type text', async () => {
