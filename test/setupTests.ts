@@ -1,6 +1,5 @@
-import '@testing-library/jest-dom';
+import { beforeAll, afterAll } from 'vitest';
 
-// eslint-disable-next-line @typescript-eslint/no-empty-function
 const voidFn = () => {};
 
 let originalMatchMedia: (query: string) => MediaQueryList;
