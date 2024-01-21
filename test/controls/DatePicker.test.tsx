@@ -96,6 +96,7 @@ describe('DatePicker', () => {
 	it('can select date', async () => {
 		const todayDay = format(new Date(), 'd');
 
+		// eslint-disable-next-line testing-library/render-result-naming-convention
 		const renderResult = render(
 			<FormComponent
 				onSubmit={(values) => {
@@ -106,6 +107,7 @@ describe('DatePicker', () => {
 				}}
 			/>
 		);
+		// eslint-disable-next-line testing-library/no-node-access, testing-library/no-container
 		const dateChooserButton = renderResult.container.querySelector(
 			'button[aria-label = "Choose date"]'
 		);
@@ -115,6 +117,7 @@ describe('DatePicker', () => {
 
 		const popupDialog = screen.getByRole('dialog');
 
+		// eslint-disable-next-line testing-library/no-node-access
 		const allButtons = popupDialog.querySelectorAll('button');
 		const matchingButtons = range(allButtons.length)
 			.map((index) => allButtons[index])

@@ -1,6 +1,6 @@
-import { beforeEach, describe, it, vi, expect } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { useForm } from 'react-hook-form';
-import { render, waitFor, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { SelectOption } from '../../src';
 import Autocomplete from '../../src/controls/Autocomplete';
@@ -62,19 +62,19 @@ describe('Autocomplete', () => {
 		vi.clearAllMocks();
 	});
 	it('can select option', async () => {
-		await waitFor(() => render(<FormComponent />));
+		render(<FormComponent />);
 
 		const input = screen.getByLabelText('The Field');
 
-		await waitFor(() => userEvent.click(input));
+		await userEvent.click(input);
 		expect(screen.queryByText('First')).toBeVisible();
 		expect(screen.queryByText('Second')).toBeVisible();
 		expect(screen.queryByText('Third')).toBeVisible();
 		expect(screen.queryByText('Fourth')).toBeVisible();
-		await waitFor(() => userEvent.click(screen.getByText('Third')));
+		await userEvent.click(screen.getByText('Third'));
 		expect(onValueHasChanged).toHaveBeenCalled();
 
-		await waitFor(() => userEvent.click(screen.getByText('Submit')));
+		await userEvent.click(screen.getByText('Submit'));
 		expect(onSubmit).toHaveBeenCalledWith({
 			field: {
 				label: 'Third',
