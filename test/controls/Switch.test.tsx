@@ -1,6 +1,6 @@
 import { beforeEach, describe, it, vi, expect } from 'vitest';
 import { useForm } from 'react-hook-form';
-import { render, waitFor, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Switch from '../../src/controls/Switch';
 
@@ -41,13 +41,13 @@ describe('Switch', () => {
 		vi.clearAllMocks();
 	});
 	it('works', async () => {
-		await waitFor(() => render(<FormComponent />));
+		render(<FormComponent />);
 
 		const input = screen.getByLabelText('The Field');
 		await userEvent.click(input);
 		expect(onValueHasChanged).toHaveBeenCalled();
 
-		await waitFor(() => userEvent.click(screen.getByText('Submit')));
+		await userEvent.click(screen.getByText('Submit'));
 		expect(onSubmit).toHaveBeenCalledWith({
 			field: true
 		});
