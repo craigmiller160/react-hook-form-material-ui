@@ -1,3 +1,4 @@
+import { beforeEach, describe, it, vi, expect} from 'vitest';
 import { DatePicker, ValueHasChanged } from '../../src';
 import { useForm } from 'react-hook-form';
 import { render, screen, waitFor } from '@testing-library/react';
@@ -159,7 +160,7 @@ describe('DatePicker', () => {
 
 	it('renders with id', () => {
 		const { container } = render(
-			<FormComponent onSubmit={jest.fn()} onValueHasChanged={jest.fn()} />
+			<FormComponent onSubmit={vi.fn()} onValueHasChanged={vi.fn()} />
 		);
 		validateIds(container, 'field');
 	});

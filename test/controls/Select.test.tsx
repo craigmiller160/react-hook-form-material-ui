@@ -1,3 +1,4 @@
+import { beforeEach, describe, it, vi, expect} from 'vitest';
 import { SelectOption, ValueHasChanged, Select } from '../../src';
 import { useForm } from 'react-hook-form';
 import { render, screen } from '@testing-library/react';
@@ -70,7 +71,7 @@ describe('Select', () => {
 
 	it('renders with id', () => {
 		const { container } = render(
-			<FormComponent onSubmit={jest.fn} onValueHasChanged={jest.fn} />
+			<FormComponent onSubmit={vi.fn()} onValueHasChanged={vi.fn()} />
 		);
 		validateIds(container, 'field');
 	});

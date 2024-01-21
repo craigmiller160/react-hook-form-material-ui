@@ -1,3 +1,4 @@
+import { beforeEach, describe, it, vi, expect} from 'vitest';
 import { useForm } from 'react-hook-form';
 import { render, waitFor, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -8,8 +9,8 @@ interface Form {
 	field: boolean;
 }
 
-const onSubmit = jest.fn();
-const onValueHasChanged = jest.fn();
+const onSubmit = vi.fn();
+const onValueHasChanged = vi.fn();
 
 const FormComponent = () => {
 	const { control, handleSubmit } = useForm<Form>({
@@ -38,7 +39,7 @@ const FormComponent = () => {
 
 describe('Switch', () => {
 	beforeEach(() => {
-		jest.clearAllMocks();
+		vi.clearAllMocks();
 	});
 	it('works', async () => {
 		await waitFor(() => render(<FormComponent />));
