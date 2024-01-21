@@ -17,7 +17,10 @@
     "lib",
     ".yalc"
   ],
-  "scripts": {},
+  "scripts": {
+    "build": "c-validate && c-build-lib",
+    "postinstall": "c-init"
+  },
   "peerDependencies": {
     "@mui/material": ">=5.8.6",
     "@mui/x-date-pickers": ">=5.0.0-alpha.7",
