@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form';
 import { Checkbox, ValueHasChanged } from '../../src';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { validateIds } from '../validateIds';
 
 interface Form {
 	readonly field: boolean;
@@ -65,6 +64,6 @@ describe('Checkbox', () => {
 		const { container } = render(
 			<FormComponent onSubmit={vi.fn()} onValueHasChanged={vi.fn()} />
 		);
-		validateIds(container, 'field');
+		expect(container).validateInputIds('field');
 	});
 });

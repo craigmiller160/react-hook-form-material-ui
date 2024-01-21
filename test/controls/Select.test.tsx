@@ -3,7 +3,6 @@ import { SelectOption, ValueHasChanged, Select } from '../../src';
 import { useForm } from 'react-hook-form';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { validateIds } from '../validateIds';
 
 const options: ReadonlyArray<SelectOption<number>> = [
 	{ value: 1, label: 'One' },
@@ -73,6 +72,6 @@ describe('Select', () => {
 		const { container } = render(
 			<FormComponent onSubmit={vi.fn()} onValueHasChanged={vi.fn()} />
 		);
-		validateIds(container, 'field');
+		expect(container).validateInputIds('field');
 	});
 });

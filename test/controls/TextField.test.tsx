@@ -3,7 +3,6 @@ import { FieldPath, useForm, RegisterOptions } from 'react-hook-form';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import TextField, { Transform } from '../../src/controls/TextField';
-import { validateIds } from '../validateIds';
 
 interface Form {
 	field: string | number;

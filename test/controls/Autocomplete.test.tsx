@@ -4,7 +4,6 @@ import { render, waitFor, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { SelectOption } from '../../src';
 import Autocomplete from '../../src/controls/Autocomplete';
-import { validateIds } from '../validateIds';
 
 interface Form {
 	field: SelectOption<number> | null;
@@ -86,6 +85,6 @@ describe('Autocomplete', () => {
 
 	it('renders with id', () => {
 		const { container } = render(<FormComponent />);
-		validateIds(container, 'field');
+		expect(container).validateInputIds('field');
 	});
 });

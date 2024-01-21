@@ -6,7 +6,6 @@ import userEvent from '@testing-library/user-event';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import format from 'date-fns/format/index';
-import { validateIds } from '../validateIds';
 
 interface Form {
 	readonly field: Date | null;
@@ -162,6 +161,6 @@ describe('DatePicker', () => {
 		const { container } = render(
 			<FormComponent onSubmit={vi.fn()} onValueHasChanged={vi.fn()} />
 		);
-		validateIds(container, 'field');
+		expect(container).validateInputIds('field');
 	});
 });
