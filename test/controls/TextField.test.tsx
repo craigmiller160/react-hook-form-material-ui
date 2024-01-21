@@ -3,7 +3,7 @@ import { FieldPath, useForm, RegisterOptions } from 'react-hook-form';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import TextField, { Transform } from '../../src/controls/TextField';
-import { validateIds } from './validateIds';
+import { validateIds } from '../validateIds';
 
 interface Form {
 	field: string | number;
@@ -151,16 +151,16 @@ describe('TextField', () => {
 		const { container: textContainer } = render(
 			<FormComponent type="text" />
 		);
-		validateIds(textContainer, 'field');
+		expect(textContainer).validateInputIds('field');
 
 		const { container: textAreaContainer } = render(
 			<FormComponent type="text" textArea />
 		);
-		validateIds(textAreaContainer, 'field', 'textarea');
+		expect(textAreaContainer).validateInputIds('field', 'textarea');
 
 		const { container: numberContainer } = render(
 			<FormComponent type="number" />
 		);
-		validateIds(numberContainer, 'field');
+		expect(numberContainer).validateInputIds('field');
 	});
 });

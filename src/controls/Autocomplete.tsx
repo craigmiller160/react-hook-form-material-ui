@@ -15,7 +15,7 @@ const getOptionLabel = <R extends any>(option: string | SelectOption<R>) => {
 	if (typeof option === 'string') {
 		return option;
 	}
-	return (option as SelectOption<R>).label;
+	return option.label;
 };
 
 const Autocomplete = <F extends FieldValues, R>(props: Props<F, R>) => {

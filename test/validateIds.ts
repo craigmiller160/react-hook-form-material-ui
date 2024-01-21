@@ -1,8 +1,8 @@
 import { expect } from 'vitest';
 
-type InputTag = 'input' | 'textarea';
+export type InputTag = 'input' | 'textarea';
 
-export const validateIds = (
+const validateInputIds = (
 	container: HTMLElement,
 	baseId: string,
 	inputTag: InputTag = 'input'
@@ -12,3 +12,7 @@ export const validateIds = (
 	expect(label?.id).toEqual(`${baseId}-label`);
 	expect(input?.id).toEqual(baseId);
 };
+
+expect.extend({
+	validateInputIds
+});
