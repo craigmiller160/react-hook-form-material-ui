@@ -1,32 +1,11 @@
 {
-  "compilerOptions": {
-    "target": "es2022",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "moduleResolution": "Node16",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "react-jsx",
-    "declaration": true,
-    "module": "es2015",
-    "outDir": "./lib"
-  },
+  "extends": "@craigmiller160/js-config/configs/typescript/tsconfig.module.json",
   "include": [
-    "./src/**/*"
+    "src/**/*"
   ],
   "exclude": [
-    "./node_modules",
-    "./lib",
-    "./build",
-    "./.yalc"
+    "node_modules",
+    "build",
+    "lib"
   ]
 }

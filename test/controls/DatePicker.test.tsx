@@ -1,11 +1,11 @@
-import { DatePicker, ValueHasChanged } from '../../src';
+import { beforeEach, describe, it, vi, expect } from 'vitest';
+import { DatePicker, type ValueHasChanged } from '../../src';
 import { useForm } from 'react-hook-form';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import format from 'date-fns/format/index';
-import { validateIds } from './validateIds';
 
 interface Form {
 	readonly field: Date | null;
@@ -96,6 +96,7 @@ describe('DatePicker', () => {
 	it('can select date', async () => {
 		const todayDay = format(new Date(), 'd');
 
+		// eslint-disable-next-line testing-library/render-result-naming-convention
 		const renderResult = render(
 			<FormComponent
 				onSubmit={(values) => {
@@ -106,15 +107,17 @@ describe('DatePicker', () => {
 				}}
 			/>
 		);
+		// eslint-disable-next-line testing-library/no-node-access, testing-library/no-container
 		const dateChooserButton = renderResult.container.querySelector(
 			'button[aria-label = "Choose date"]'
 		);
 		expect(dateChooserButton).not.toBeNull();
-		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+
 		await userEvent.click(dateChooserButton!);
 
 		const popupDialog = screen.getByRole('dialog');
 
+		// eslint-disable-next-line testing-library/no-node-access
 		const allButtons = popupDialog.querySelectorAll('button');
 		const matchingButtons = range(allButtons.length)
 			.map((index) => allButtons[index])
@@ -126,7 +129,7 @@ describe('DatePicker', () => {
 		expect(valueHasChangedCalled).toEqual(true);
 		await userEvent.click(screen.getByText('Submit'));
 		expect(receivedValues?.field).toBeTruthy();
-		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+
 		const formattedValue = format(receivedValues!.field!, 'yyyy-MM-dd');
 		expect(formattedValue).toEqual(format(new Date(), 'yyyy-MM-dd'));
 	});
@@ -152,15 +155,15 @@ describe('DatePicker', () => {
 		await userEvent.click(screen.getByText('Submit'));
 		expect(receivedValues).not.toBeUndefined();
 		expect(receivedValues?.field).toBeTruthy();
-		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+
 		const formattedValue = format(receivedValues!.field!, 'yyyy-MM-dd');
 		expect(formattedValue).toEqual('2022-01-01');
 	});
 
 	it('renders with id', () => {
 		const { container } = render(
-			<FormComponent onSubmit={jest.fn()} onValueHasChanged={jest.fn()} />
+			<FormComponent onSubmit={vi.fn()} onValueHasChanged={vi.fn()} />
 		);
-		validateIds(container, 'field');
+		expect(container).hasInputIds('field');
 	});
 });

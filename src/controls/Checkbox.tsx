@@ -1,7 +1,7 @@
-import { Controller, FieldValues } from 'react-hook-form';
+import { Controller, type FieldValues } from 'react-hook-form';
 import { FormControlLabel } from '@mui/material';
 import MuiCheckbox from '@mui/material/Checkbox';
-import { DefaultProps } from '../types/form';
+import type { DefaultProps } from '../types/form';
 import { useControlId } from '../utils/useControlId';
 
 type LabelPlacement = 'end' | 'start' | 'top' | 'bottom';

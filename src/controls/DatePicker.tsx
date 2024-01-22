@@ -1,5 +1,5 @@
-import { Controller, FieldValues } from 'react-hook-form';
-import { DefaultProps, Rules } from '../types/form';
+import { Controller, type FieldValues } from 'react-hook-form';
+import type { DefaultProps, Rules } from '../types/form';
 import { DatePicker as MuiDatePicker } from '@mui/x-date-pickers';
 import MuiTextField from '@mui/material/TextField';
 import isValid from 'date-fns/isValid/index';

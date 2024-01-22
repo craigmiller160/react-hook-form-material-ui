@@ -1,16 +1,16 @@
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { useForm } from 'react-hook-form';
-import { render, waitFor, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { SelectOption } from '../../src';
+import { type SelectOption } from '../../src';
 import Autocomplete from '../../src/controls/Autocomplete';
-import { validateIds } from './validateIds';
 
 interface Form {
 	field: SelectOption<number> | null;
 }
 
-const onSubmit = jest.fn();
-const onValueHasChanged = jest.fn();
+const onSubmit = vi.fn();
+const onValueHasChanged = vi.fn();
 
 const FormComponent = () => {
 	const { control, handleSubmit } = useForm<Form>({
@@ -59,22 +59,22 @@ const FormComponent = () => {
 
 describe('Autocomplete', () => {
 	beforeEach(() => {
-		jest.clearAllMocks();
+		vi.clearAllMocks();
 	});
 	it('can select option', async () => {
-		await waitFor(() => render(<FormComponent />));
+		render(<FormComponent />);
 
 		const input = screen.getByLabelText('The Field');
 
-		await waitFor(() => userEvent.click(input));
+		await userEvent.click(input);
 		expect(screen.queryByText('First')).toBeVisible();
 		expect(screen.queryByText('Second')).toBeVisible();
 		expect(screen.queryByText('Third')).toBeVisible();
 		expect(screen.queryByText('Fourth')).toBeVisible();
-		await waitFor(() => userEvent.click(screen.getByText('Third')));
+		await userEvent.click(screen.getByText('Third'));
 		expect(onValueHasChanged).toHaveBeenCalled();
 
-		await waitFor(() => userEvent.click(screen.getByText('Submit')));
+		await userEvent.click(screen.getByText('Submit'));
 		expect(onSubmit).toHaveBeenCalledWith({
 			field: {
 				label: 'Third',
@@ -85,6 +85,6 @@ describe('Autocomplete', () => {
 
 	it('renders with id', () => {
 		const { container } = render(<FormComponent />);
-		validateIds(container, 'field');
+		expect(container).hasInputIds('field');
 	});
 });

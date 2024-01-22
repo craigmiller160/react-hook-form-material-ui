@@ -1,8 +1,8 @@
-import { SelectOption, ValueHasChanged, Select } from '../../src';
+import { beforeEach, describe, it, vi, expect } from 'vitest';
+import { type SelectOption, type ValueHasChanged, Select } from '../../src';
 import { useForm } from 'react-hook-form';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { validateIds } from './validateIds';
 
 const options: ReadonlyArray<SelectOption<number>> = [
 	{ value: 1, label: 'One' },
@@ -70,8 +70,8 @@ describe('Select', () => {
 
 	it('renders with id', () => {
 		const { container } = render(
-			<FormComponent onSubmit={jest.fn} onValueHasChanged={jest.fn} />
+			<FormComponent onSubmit={vi.fn()} onValueHasChanged={vi.fn()} />
 		);
-		validateIds(container, 'field');
+		expect(container).hasInputIds('field');
 	});
 });

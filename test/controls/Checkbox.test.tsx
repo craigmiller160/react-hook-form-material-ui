@@ -1,8 +1,8 @@
+import { beforeEach, describe, it, vi, expect } from 'vitest';
 import { useForm } from 'react-hook-form';
-import { Checkbox, ValueHasChanged } from '../../src';
+import { Checkbox, type ValueHasChanged } from '../../src';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { validateIds } from './validateIds';
 
 interface Form {
 	readonly field: boolean;
@@ -62,8 +62,8 @@ describe('Checkbox', () => {
 
 	it('renders with id', () => {
 		const { container } = render(
-			<FormComponent onSubmit={jest.fn()} onValueHasChanged={jest.fn()} />
+			<FormComponent onSubmit={vi.fn()} onValueHasChanged={vi.fn()} />
 		);
-		validateIds(container, 'field');
+		expect(container).hasInputIds('field');
 	});
 });

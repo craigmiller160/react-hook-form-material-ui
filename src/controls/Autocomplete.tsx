@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unnecessary-type-constraint */
-import { Controller, FieldValues } from 'react-hook-form';
+import { Controller, type FieldValues } from 'react-hook-form';
 import MuiAutocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
-import { DefaultProps, SelectOption } from '../types/form';
+import type { DefaultProps, SelectOption } from '../types/form';
 import { useControlId } from '../utils/useControlId';
 
 interface Props<F extends FieldValues, R> extends DefaultProps<F> {
@@ -15,7 +15,7 @@ const getOptionLabel = <R extends any>(option: string | SelectOption<R>) => {
 	if (typeof option === 'string') {
 		return option;
 	}
-	return (option as SelectOption<R>).label;
+	return option.label;
 };
 
 const Autocomplete = <F extends FieldValues, R>(props: Props<F, R>) => {

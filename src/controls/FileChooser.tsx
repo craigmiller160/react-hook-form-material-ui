@@ -1,8 +1,8 @@
-import React, { MutableRefObject } from 'react';
+import React, { type MutableRefObject } from 'react';
 import { FormControlLabel, Input } from '@mui/material';
-import { Controller, FieldValues } from 'react-hook-form';
+import { Controller, type FieldValues } from 'react-hook-form';
 import styled from '@emotion/styled';
-import { DefaultProps } from '../types/form';
+import { type DefaultProps } from '../types/form';
 import { useControlId } from '../utils/useControlId';
 
 interface Props<F extends FieldValues> extends DefaultProps<F> {

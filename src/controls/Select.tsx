@@ -1,5 +1,5 @@
-import { DefaultProps, SelectOption } from '../types/form';
-import { Controller, FieldValues } from 'react-hook-form';
+import type { DefaultProps, SelectOption } from '../types/form';
+import { Controller, type FieldValues } from 'react-hook-form';
 import {
 	FormControl,
 	FormHelperText,

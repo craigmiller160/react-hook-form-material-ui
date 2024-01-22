@@ -1,8 +1,8 @@
-import { FieldPath, useForm, RegisterOptions } from 'react-hook-form';
-import { render, screen, waitFor } from '@testing-library/react';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { type FieldPath, useForm, type RegisterOptions } from 'react-hook-form';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import TextField, { Transform } from '../../src/controls/TextField';
-import { validateIds } from './validateIds';
+import TextField, { type Transform } from '../../src/controls/TextField';
 
 interface Form {
 	field: string | number;
@@ -14,14 +14,14 @@ interface FormComponentProps {
 		RegisterOptions<Form, FieldPath<Form>>,
 		'valueAsNumber' | 'valueAsDate' | 'setValueAs' | 'disabled'
 	>;
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+
 	transform?: Transform;
 	onBlurTransform?: Transform;
 	textArea?: boolean;
 }
 
-const onSubmit = jest.fn();
-const onValueHasChanged = jest.fn();
+const onSubmit = vi.fn();
+const onValueHasChanged = vi.fn();
 
 const FormComponent = (props: FormComponentProps) => {
 	const defaultValue = props.type ? '' : 0;
@@ -58,24 +58,24 @@ const FormComponent = (props: FormComponentProps) => {
 
 describe('TextField', () => {
 	beforeEach(() => {
-		jest.clearAllMocks();
+		vi.clearAllMocks();
 	});
 
 	it('accepts input for type text', async () => {
-		await waitFor(() => render(<FormComponent type="text" />));
+		render(<FormComponent type="text" />);
 
 		const textField = screen.getByLabelText('The Field');
 		await userEvent.type(textField, 'Hello World');
 		expect(onValueHasChanged).toHaveBeenCalled();
 
-		await waitFor(() => userEvent.click(screen.getByText('Submit')));
+		await userEvent.click(screen.getByText('Submit'));
 		expect(onSubmit).toHaveBeenCalledWith({
 			field: 'Hello World'
 		});
 	});
 
 	it('accepts input for type number', async () => {
-		await waitFor(() => render(<FormComponent type="number" />));
+		render(<FormComponent type="number" />);
 
 		const textField = screen.getByLabelText('The Field');
 		const submit = screen.getByText('Submit');
@@ -83,7 +83,7 @@ describe('TextField', () => {
 		await userEvent.clear(textField);
 		await userEvent.type(textField, '12345');
 
-		await waitFor(() => userEvent.click(submit));
+		await userEvent.click(submit);
 		expect(onSubmit).toHaveBeenNthCalledWith(1, {
 			field: 12345
 		});
@@ -91,20 +91,18 @@ describe('TextField', () => {
 		await userEvent.clear(textField);
 		await userEvent.type(textField, 'ABC');
 
-		await waitFor(() => userEvent.click(submit));
+		await userEvent.click(submit);
 		expect(onSubmit).toHaveBeenNthCalledWith(2, {
 			field: ''
 		});
 	});
 
 	it('transforms input onBlur', async () => {
-		await waitFor(() =>
-			render(
-				<FormComponent
-					type="text"
-					onBlurTransform={(value) => `${value}-World`}
-				/>
-			)
+		render(
+			<FormComponent
+				type="text"
+				onBlurTransform={(value) => `${value}-World`}
+			/>
 		);
 
 		const textField = screen.getByLabelText('The Field');
@@ -113,33 +111,31 @@ describe('TextField', () => {
 		await userEvent.clear(textField);
 		await userEvent.type(textField, '123');
 
-		await waitFor(() => userEvent.click(submit));
+		await userEvent.click(submit);
 		expect(onSubmit).toHaveBeenNthCalledWith(1, {
 			field: '123-World'
 		});
 	});
 
 	it('transforms input', async () => {
-		await waitFor(() =>
-			render(
-				<FormComponent
-					type="text"
-					transform={(value) => value.toUpperCase()}
-				/>
-			)
+		render(
+			<FormComponent
+				type="text"
+				transform={(value) => value.toUpperCase()}
+			/>
 		);
 
 		const textField = screen.getByLabelText('The Field');
 		await userEvent.type(textField, 'Hello World');
 
-		await waitFor(() => userEvent.click(screen.getByText('Submit')));
+		await userEvent.click(screen.getByText('Submit'));
 		expect(onSubmit).toHaveBeenCalledWith({
 			field: 'HELLO WORLD'
 		});
 	});
 
-	it('shows text area', async () => {
-		await waitFor(() => render(<FormComponent type="text" textArea />));
+	it('shows text area', () => {
+		render(<FormComponent type="text" textArea />);
 
 		const input = screen.getByLabelText('The Field');
 		expect(input.tagName).toEqual('TEXTAREA');
@@ -150,16 +146,16 @@ describe('TextField', () => {
 		const { container: textContainer } = render(
 			<FormComponent type="text" />
 		);
-		validateIds(textContainer, 'field');
+		expect(textContainer).hasInputIds('field');
 
 		const { container: textAreaContainer } = render(
 			<FormComponent type="text" textArea />
 		);
-		validateIds(textAreaContainer, 'field', 'textarea');
+		expect(textAreaContainer).hasInputIds('field', 'textarea');
 
 		const { container: numberContainer } = render(
 			<FormComponent type="number" />
 		);
-		validateIds(numberContainer, 'field');
+		expect(numberContainer).hasInputIds('field');
 	});
 });
