@@ -1,5 +1,5 @@
 import { beforeEach, describe, it, vi, expect } from 'vitest';
-import { DatePicker, ValueHasChanged } from '../../src';
+import { DatePicker, type ValueHasChanged } from '../../src';
 import { useForm } from 'react-hook-form';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';

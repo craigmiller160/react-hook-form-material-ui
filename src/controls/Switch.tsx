@@ -1,8 +1,8 @@
 import React from 'react';
-import { Controller, FieldValues } from 'react-hook-form';
+import { Controller, type FieldValues } from 'react-hook-form';
 import MuiSwitch from '@mui/material/Switch';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import { DefaultProps } from '../types/form';
+import { type DefaultProps } from '../types/form';
 import { useControlId } from '../utils/useControlId';
 
 interface Props<F extends FieldValues> extends DefaultProps<F> {

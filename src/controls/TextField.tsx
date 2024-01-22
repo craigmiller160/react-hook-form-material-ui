@@ -1,7 +1,7 @@
 import React from 'react';
-import { Controller, FieldValues } from 'react-hook-form';
+import { Controller, type FieldValues } from 'react-hook-form';
 import MuiTextField from '@mui/material/TextField';
-import { DefaultProps } from '../types/form';
+import { type DefaultProps } from '../types/form';
 import { useControlId } from '../utils/useControlId';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

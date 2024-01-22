@@ -1,5 +1,5 @@
 import { beforeEach, describe, it, vi, expect } from 'vitest';
-import { SelectOption, ValueHasChanged, Select } from '../../src';
+import { type SelectOption, type ValueHasChanged, Select } from '../../src';
 import { useForm } from 'react-hook-form';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';

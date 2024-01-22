@@ -2,7 +2,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { useForm } from 'react-hook-form';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { SelectOption } from '../../src';
+import { type SelectOption } from '../../src';
 import Autocomplete from '../../src/controls/Autocomplete';
 
 interface Form {
