@@ -55,7 +55,12 @@ test('renders, submits, and emits value on change', async () => {
 
 	const button = screen.getByText('Submit');
 	await userEvent.click(button);
-	expect(onSubmit).toHaveBeenCalledWith<[Form]>({
-		file
-	});
+	expect(onSubmit).toHaveBeenCalledWith<
+		[Form, ReturnType<typeof expect.anything>]
+	>(
+		{
+			file
+		},
+		expect.anything()
+	);
 });
