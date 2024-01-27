@@ -36,7 +36,6 @@ const FormComponent = (props: FormComponentProps) => {
 					control={control}
 					name="field"
 					label="My Date"
-					onValueHasChanged={props.onValueHasChanged}
 				/>
 				<button type="submit">Submit</button>
 			</form>
