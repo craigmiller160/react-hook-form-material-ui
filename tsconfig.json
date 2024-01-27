@@ -1,8 +1,8 @@
 {
   "extends": "@craigmiller160/js-config/configs/typescript/tsconfig.module.json",
   "compilerOptions": {
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext"
+    "module": "nodenext",
+    "moduleResolution": "nodenext"
   },
   "include": [
     "src/**/*"
