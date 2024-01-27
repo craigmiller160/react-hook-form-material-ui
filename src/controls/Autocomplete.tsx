@@ -2,8 +2,8 @@
 import { Controller, type FieldValues } from 'react-hook-form';
 import MuiAutocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
-import type { DefaultProps, SelectOption } from '../types/form';
-import { useControlId } from '../utils/useControlId';
+import type { DefaultProps, SelectOption } from '../types/form.js';
+import { useControlId } from '../utils/useControlId.js';
 
 interface Props<F extends FieldValues, R> extends DefaultProps<F> {
 	readonly options: ReadonlyArray<SelectOption<R>>;

@@ -2,8 +2,8 @@ import React from 'react';
 import { Controller, type FieldValues } from 'react-hook-form';
 import MuiSwitch from '@mui/material/Switch';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import { type DefaultProps } from '../types/form';
-import { useControlId } from '../utils/useControlId';
+import { type DefaultProps } from '../types/form.js';
+import { useControlId } from '../utils/useControlId.js';
 
 interface Props<F extends FieldValues> extends DefaultProps<F> {
 	readonly color?: 'primary' | 'secondary' | 'default';
