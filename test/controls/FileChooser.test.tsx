@@ -30,11 +30,12 @@ const FormComponent = (props: FormComponentProps) => {
 				name="file"
 				label="My File"
 			/>
+			<button type="submit">Submit</button>
 		</form>
 	);
 };
 
-test('renders, submits, and emits value on change', () => {
+test('renders, submits, and emits value on change', async () => {
 	const onSubmit: MockedFunction<OnSubmit> = vi.fn();
 	const onValueHasChanged: MockedFunction<ValueHasChanged> = vi.fn();
 	render(
@@ -43,6 +44,17 @@ test('renders, submits, and emits value on change', () => {
 			onValueHasChanged={onValueHasChanged}
 		/>
 	);
-    const input = screen.getByLabelText('My File');
-    expect(input).toBeVisible();
+	const input = screen.getByLabelText('My File');
+	expect(input).toBeVisible();
+
+	const file = new File(['hello'], 'hello.png', { type: 'image/png' });
+	await userEvent.upload(input, file);
+
+	expect(onValueHasChanged).toHaveBeenCalledWith(file);
+
+	const button = screen.getByText('Submit');
+	await userEvent.click(button);
+	expect(onSubmit).toHaveBeenCalledWith<[Form]>({
+		file
+	});
 });
