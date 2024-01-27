@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unnecessary-type-constraint */
 import { Controller, type FieldValues } from 'react-hook-form';
-import MuiAutocomplete from '@mui/material/Autocomplete';
-import TextField from '@mui/material/TextField';
+import { Autocomplete as MuiAutocomplete, TextField } from '@mui/material';
 import type { DefaultProps, SelectOption } from '../types/form.js';
 import { useControlId } from '../utils/useControlId.js';
 

@@ -1,6 +1,5 @@
 import { Controller, type FieldValues } from 'react-hook-form';
-import { FormControlLabel } from '@mui/material';
-import MuiCheckbox from '@mui/material/Checkbox';
+import { FormControlLabel, Checkbox as MuiCheckbox } from '@mui/material';
 import type { DefaultProps } from '../types/form.js';
 import { useControlId } from '../utils/useControlId.js';
 

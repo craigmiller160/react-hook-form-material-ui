@@ -1,9 +1,9 @@
 import { Controller, type FieldValues } from 'react-hook-form';
-import type { DefaultProps, Rules } from '../types/form';
+import type { DefaultProps, Rules } from '../types/form.js';
 import { DatePicker as MuiDatePicker } from '@mui/x-date-pickers';
-import MuiTextField from '@mui/material/TextField';
-import isValid from 'date-fns/isValid/index';
-import { useControlId } from '../utils/useControlId';
+import { TextField as MuiTextField } from '@mui/material';
+import { isValid } from 'date-fns';
+import { useControlId } from '../utils/useControlId.js';
 
 const validate = (value?: Date): string | undefined =>
 	!value || isValid(value) ? undefined : 'Must be valid date';
