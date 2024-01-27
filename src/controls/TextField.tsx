@@ -1,6 +1,6 @@
 import React from 'react';
 import { Controller, type FieldValues } from 'react-hook-form';
-import MuiTextField from '@mui/material/TextField/index.js';
+import { TextField as MuiTextField } from '@mui/material';
 import { type DefaultProps } from '../types/form.js';
 import { useControlId } from '../utils/useControlId.js';
 

@@ -2,8 +2,8 @@ import React, { type MutableRefObject } from 'react';
 import { FormControlLabel, Input } from '@mui/material';
 import { Controller, type FieldValues } from 'react-hook-form';
 import styled from '@emotion/styled';
-import { type DefaultProps } from '../types/form';
-import { useControlId } from '../utils/useControlId';
+import { type DefaultProps } from '../types/form.js';
+import { useControlId } from '../utils/useControlId.js';
 
 interface Props<F extends FieldValues> extends DefaultProps<F> {
 	readonly inputRef?: MutableRefObject<HTMLInputElement | undefined>;

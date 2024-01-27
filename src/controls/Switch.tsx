@@ -1,7 +1,6 @@
 import React from 'react';
 import { Controller, type FieldValues } from 'react-hook-form';
-import MuiSwitch from '@mui/material/Switch';
-import FormControlLabel from '@mui/material/FormControlLabel';
+import { Switch as MuiSwitch, FormControlLabel } from '@mui/material';
 import { type DefaultProps } from '../types/form.js';
 import { useControlId } from '../utils/useControlId.js';
 
