@@ -1,4 +1,4 @@
-import { type MockedFunction, test, vi } from 'vitest';
+import { type MockedFunction, test, vi, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { userEvent } from '@testing-library/user-event';
 import { FileChooser, type ValueHasChanged } from '../../src/index.js';
