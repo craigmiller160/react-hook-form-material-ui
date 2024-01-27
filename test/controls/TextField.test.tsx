@@ -1,8 +1,8 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { type FieldPath, useForm, type RegisterOptions } from 'react-hook-form';
 import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import TextField, { type Transform } from '../../src/controls/TextField';
+import { userEvent } from '@testing-library/user-event';
+import TextField, { type Transform } from '../../src/controls/TextField.js';
 
 interface Form {
 	field: string | number;

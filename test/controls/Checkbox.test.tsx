@@ -1,8 +1,8 @@
 import { beforeEach, describe, it, vi, expect } from 'vitest';
 import { useForm } from 'react-hook-form';
-import { Checkbox, type ValueHasChanged } from '../../src';
+import { Checkbox, type ValueHasChanged } from '../../src/index.js';
 import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { userEvent } from '@testing-library/user-event';
 
 interface Form {
 	readonly field: boolean;

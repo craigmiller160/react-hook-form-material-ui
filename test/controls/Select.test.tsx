@@ -1,8 +1,12 @@
 import { beforeEach, describe, it, vi, expect } from 'vitest';
-import { type SelectOption, type ValueHasChanged, Select } from '../../src';
+import {
+	type SelectOption,
+	type ValueHasChanged,
+	Select
+} from '../../src/index.js';
 import { useForm } from 'react-hook-form';
 import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { userEvent } from '@testing-library/user-event';
 
 const options: ReadonlyArray<SelectOption<number>> = [
 	{ value: 1, label: 'One' },

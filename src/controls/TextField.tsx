@@ -1,8 +1,8 @@
 import React from 'react';
 import { Controller, type FieldValues } from 'react-hook-form';
-import MuiTextField from '@mui/material/TextField';
-import { type DefaultProps } from '../types/form';
-import { useControlId } from '../utils/useControlId';
+import { TextField as MuiTextField } from '@mui/material';
+import { type DefaultProps } from '../types/form.js';
+import { useControlId } from '../utils/useControlId.js';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type Transform = (value: string) => any;

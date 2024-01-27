@@ -1,4 +1,4 @@
-import type { DefaultProps, SelectOption } from '../types/form';
+import type { DefaultProps, SelectOption } from '../types/form.js';
 import { Controller, type FieldValues } from 'react-hook-form';
 import {
 	FormControl,
@@ -7,7 +7,7 @@ import {
 	MenuItem,
 	Select as MuiSelect
 } from '@mui/material';
-import { useControlId } from '../utils/useControlId';
+import { useControlId } from '../utils/useControlId.js';
 
 interface Props<F extends FieldValues> extends DefaultProps<F> {
 	readonly options: ReadonlyArray<SelectOption<string | number>>;

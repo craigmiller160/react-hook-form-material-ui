@@ -1,9 +1,9 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { useForm } from 'react-hook-form';
 import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import { type SelectOption } from '../../src';
-import Autocomplete from '../../src/controls/Autocomplete';
+import { userEvent } from '@testing-library/user-event';
+import { type SelectOption } from '../../src/index.js';
+import Autocomplete from '../../src/controls/Autocomplete.js';
 
 interface Form {
 	field: SelectOption<number> | null;

@@ -1,8 +1,8 @@
 import { beforeEach, describe, it, vi, expect } from 'vitest';
-import { DatePicker, type ValueHasChanged } from '../../src';
+import { DatePicker, type ValueHasChanged } from '../../src/index.js';
 import { useForm } from 'react-hook-form';
 import { render, screen, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { userEvent } from '@testing-library/user-event';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import format from 'date-fns/format/index';
