@@ -1,9 +1,5 @@
 {
-  "extends": "@craigmiller160/js-config/configs/typescript/tsconfig.module.json",
-  "compilerOptions": {
-    "module": "nodenext",
-    "moduleResolution": "nodenext"
-  },
+  "extends": "@craigmiller160/js-config/configs/typescript/tsconfig.module.lib.json",
   "include": [
     "src/**/*"
   ],

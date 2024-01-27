@@ -9,8 +9,8 @@ devDependencies:
     specifier: ^7.0.0
     version: 7.23.7
   '@craigmiller160/js-config':
-    specifier: 1.0.6-beta.1
-    version: 1.0.6-beta.1(@testing-library/dom@9.3.4)(cross-env@7.0.3)(vitest@0.34.6)
+    specifier: 1.0.7
+    version: 1.0.7(@testing-library/dom@9.3.4)(cross-env@7.0.3)(vitest@0.34.6)
   '@emotion/react':
     specifier: ^11.11.3
     version: 11.11.3(@types/react@18.0.24)(react@18.2.0)
@@ -313,10 +313,9 @@ packages:
     engines: {node: '>=0.1.90'}
     dev: true
 
-  /@craigmiller160/js-config@1.0.6-beta.1(@testing-library/dom@9.3.4)(cross-env@7.0.3)(vitest@0.34.6):
-    resolution: {integrity: sha512-rbFDn0ZPjQ8IGrtLbuIxiMH46JEab+WEzcCDNW2SeyvBQCoHIzOXaslHlZxJbDNPGGEz3xQLaPJ41NiHuRae6g==}
+  /@craigmiller160/js-config@1.0.7(@testing-library/dom@9.3.4)(cross-env@7.0.3)(vitest@0.34.6):
+    resolution: {integrity: sha512-iRXqgNBr5jCuq5g2KkVZZOuimxx+97KrxdR6IX9AGWIyvzt7m75HnEGXU8/EMR+t/h/4srAb5SJF6wnAG4zdXA==}
     hasBin: true
-    requiresBuild: true
     peerDependencies:
       '@relmify/jest-fp-ts': ^2.1.1
       cross-env: ^7.0.3
