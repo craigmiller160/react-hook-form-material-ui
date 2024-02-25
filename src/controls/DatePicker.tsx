@@ -31,6 +31,7 @@ export const DatePicker = <F extends FieldValues>(props: Props<F>) => {
 				<MuiDatePicker
 					{...field}
 					className={props.className}
+					views={props.views}
 					onChange={(date, stringValue) => {
 						field.onChange(date, stringValue);
 						if (stringValue === undefined) {
