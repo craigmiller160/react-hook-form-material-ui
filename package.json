@@ -20,7 +20,7 @@
   ],
   "scripts": {
     "build": "c-validate && c-build-lib",
-    "postinstall": "c-init node"
+    "postinstall": "c-init node || echo 'No c-init'"
   },
   "peerDependencies": {
     "@mui/material": ">=5.8.6",
